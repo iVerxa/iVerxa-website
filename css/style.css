@@ -145,4 +145,52 @@ nav{
 .category-card p{
     color:#b8c0d0;
     line-height:1.6;
+}.products{
+    padding:80px;
+    text-align:center;
+}
+
+.products h2{
+    font-size:42px;
+    margin-bottom:40px;
+}
+
+.product-grid{
+    display:flex;
+    justify-content:center;
+}
+
+.product-card{
+    width:320px;
+    background:#1E293B;
+    border-radius:20px;
+    padding:20px;
+}
+
+.product-card img{
+    width:100%;
+    border-radius:15px;
+}
+
+.product-card h3{
+    margin:20px 0 10px;
+}
+
+.product-card p{
+    color:#cbd5e1;
+    margin-bottom:20px;
+}
+
+.product-card a{
+    display:inline-block;
+    padding:12px 30px;
+    background:#4F7CFF;
+    color:white;
+    text-decoration:none;
+    border-radius:30px;
+    font-weight:bold;
+}
+
+.product-card a:hover{
+    background:#3567ff;
 }
