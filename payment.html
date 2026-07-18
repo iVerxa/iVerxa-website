@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Payment | iVerxa Finds</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+.payment-container{
+max-width:900px;
+margin:50px auto;
+background:#1E293B;
+padding:40px;
+border-radius:20px;
+text-align:center;
+}
+
+.payment-container h1{
+font-size:45px;
+margin-bottom:15px;
+}
+
+.payment-container p{
+color:#CBD5E1;
+margin-bottom:30px;
+}
+
+.qr{
+width:320px;
+border-radius:20px;
+margin:20px auto;
+display:block;
+}
+
+.upi-box{
+
+background:#0F172A;
+padding:18px;
+border-radius:12px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:30px;
+
+}
+
+.upi-box span{
+
+font-size:22px;
+font-weight:bold;
+
+}
+
+.copy-btn{
+
+background:#4F7CFF;
+color:white;
+border:none;
+padding:12px 22px;
+border-radius:10px;
+cursor:pointer;
+font-size:16px;
+
+}
+
+.copy-btn:hover{
+
+background:#3567ff;
+
+}
+
+.notes{
+
+margin-top:40px;
+background:#111827;
+padding:25px;
+border-radius:15px;
+text-align:left;
+
+}
+
+.notes h2{
+
+margin-bottom:15px;
+
+}
+
+.notes li{
+
+margin-bottom:12px;
+color:#CBD5E1;
+
+}
+
+.pay-btn{
+
+display:block;
+text-decoration:none;
+margin-top:40px;
+background:#4F7CFF;
+padding:18px;
+border-radius:12px;
+color:white;
+font-size:22px;
+font-weight:bold;
+
+}
+
+.pay-btn:hover{
+
+background:#3567ff;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+<img src="images/logo.jpeg">
+</div>
+
+<ul class="menu">
+
+<li><a href="index.html">Home</a></li>
+
+</ul>
+
+</nav>
+
+<div class="payment-container">
+
+<img src="images/google-play.png" width="90">
+
+<h1>Google Play Gift Card</h1>
+
+<p>
+
+Scan the QR Code below to complete your payment.
+
+</p>
+
+<img src="images/payment-qr.jpg" class="qr">
+
+<div class="upi-box">
+
+<span id="upi">
+
+sairajhalkanche@fam
+
+</span>
+
+<button class="copy-btn" onclick="copyUPI()">
+
+Copy
+
+</button>
+
+</div>
+
+<div class="notes">
+
+<h2>Important Notes</h2>
+
+<ul>
+
+<li>Complete your payment using the QR code or UPI ID above.</li>
+
+<li>After payment, click on <b>I Have Paid</b>.</li>
+
+<li>Your payment will be verified manually.</li>
+
+<li>Your Google Play Gift Card code will be delivered to your registered email address and phone number.</li>
+
+<li>Delivery may take up to <b>2 business days</b> after successful payment verification.</li>
+
+<li>Please do not make duplicate payments.</li>
+
+<li>All sales are final and cannot be refunded after delivery.</li>
+
+</ul>
+
+</div>
+<a href="transaction.html" class="pay-btn">
+I Have Paid
+</a>
+
+</div>
+
+<script>
+
+function copyUPI(){
+
+const upi=document.getElementById("upi").innerText;
+
+navigator.clipboard.writeText(upi);
+
+alert("UPI ID Copied Successfully!");
+
+}
+
+</script>
+
+</body>
+
+</html>

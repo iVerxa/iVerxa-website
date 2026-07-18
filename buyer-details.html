@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Details | iVerxa Finds</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        .buyer-container{
+            max-width:700px;
+            margin:60px auto;
+            background:#1E293B;
+            padding:40px;
+            border-radius:20px;
+        }
+
+        .buyer-container h1{
+            text-align:center;
+            margin-bottom:30px;
+        }
+
+        .buyer-container label{
+            display:block;
+            margin-top:20px;
+            margin-bottom:8px;
+            font-weight:bold;
+        }
+
+        .buyer-container input{
+            width:100%;
+            padding:15px;
+            border:none;
+            border-radius:10px;
+            background:#0F172A;
+            color:white;
+            font-size:16px;
+        }
+
+        .continue-btn{
+            display:block;
+            width:100%;
+            margin-top:30px;
+            padding:16px;
+            border:none;
+            border-radius:12px;
+            background:#4F7CFF;
+            color:white;
+            font-size:18px;
+            font-weight:bold;
+            cursor:pointer;
+            text-decoration:none;
+        }
+
+        .continue-btn:hover{
+            background:#3567ff;
+        }
+
+        .notes{
+            margin-top:35px;
+            background:#111827;
+            padding:20px;
+            border-radius:12px;
+        }
+
+        .notes h3{
+            margin-bottom:15px;
+        }
+
+        .notes ul{
+            padding-left:20px;
+            color:#cbd5e1;
+            line-height:1.8;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+<img src="images/logo.jpeg">
+</div>
+
+<ul class="menu">
+<li><a href="index.html">Home</a></li>
+</ul>
+
+</nav>
+
+<div class="buyer-container">
+
+<h1>Buyer Details</h1>
+
+<label>Full Name</label>
+<input type="text" id="name" placeholder="Enter your full name" required>
+
+<label>Email Address</label>
+<input type="email" id="email" placeholder="Enter your email" required>
+
+<label>Phone Number</label>
+<input type="tel" id="phone" placeholder="Enter your phone number" required>
+
+<a href="payment.html" class="continue-btn">
+Continue to Payment
+<a href="payment.html" class="continue-btn">
+Continue to Payment
+</a>
+
+<div class="notes">
+
+<h3>Important Notes</h3>
+
+<ul>
+
+<li>Your gift card will be delivered only after successful payment verification.</li>
+
+<li>Please enter a valid email address and phone number.</li>
+
+<li>Your gift card code will be delivered to the email address and phone number provided above.</li>
+
+<li>Delivery may take up to 2 business days after payment verification.</li>
+
+<li>Most orders are delivered much earlier.</li>
+
+<li>Please do not submit multiple payments for the same order.</li>
+
+<li>All gift card sales are final and cannot be refunded after delivery.</li>
+
+</ul>
+
+</div>
+
+</div>
+<script>
+document.querySelector(".continue-btn").addEventListener("click", function(e) {
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+
+    if(name === "" || email === "" || phone === ""){
+        alert("Please fill all details.");
+        e.preventDefault();
+        return;
+    }
+
+    localStorage.setItem("customerName", name);
+    localStorage.setItem("customerEmail", email);
+    localStorage.setItem("customerPhone", phone);
+
+});
+</script>
+</body>
+</html>

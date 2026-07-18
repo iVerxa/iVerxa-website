@@ -23,7 +23,7 @@ nav{
 }
 
 .logo img{
-    height:70px;
+    height:55px;
     width:auto;
 }
 
@@ -145,7 +145,9 @@ nav{
 .category-card p{
     color:#b8c0d0;
     line-height:1.6;
-}.products{
+}
+
+.products{
     padding:80px;
     text-align:center;
 }
@@ -193,4 +195,101 @@ nav{
 
 .product-card a:hover{
     background:#3567ff;
+}/* ================= GIFT CARDS ================= */
+
+.gift-cards{
+    padding:80px 8%;
+    text-align:center;
+}
+
+.gift-cards h2{
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.gift-cards .subtitle{
+    color:#b8c0d0;
+    margin-bottom:50px;
+}
+
+.gift-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:30px;
+}
+
+.gift-card{
+    background:#1E293B;
+    padding:30px;
+    border-radius:20px;
+    transition:.3s;
+}
+
+.gift-card:hover{
+    transform:translateY(-8px);
+}
+
+.gift-card img{
+    width:80px;
+    margin-bottom:20px;
+}
+
+.gift-card h3{
+    margin-bottom:20px;
+}
+
+.gift-card select{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    margin-bottom:15px;
+    background:#0F172A;
+    color:white;
+}
+
+.stock{
+    color:#4ade80;
+    margin-bottom:20px;
+    font-weight:bold;
+}
+
+.gift-card a{
+    display:inline-block;
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    background:#4F7CFF;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.gift-card a:hover{
+    background:#3567ff;
+}/* ================= FOOTER ================= */
+
+footer{
+    background:#111827;
+    text-align:center;
+    padding:25px;
+    margin-top:80px;
+}
+
+footer p{
+    color:#b8c0d0;
+    font-size:16px;
+}
+.badge{
+    display:inline-block;
+    background:#FFD700;
+    color:#111827;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:bold;
+    margin:15px 0;
+}.category-link{
+    text-decoration:none;
+    color:inherit;
 }
