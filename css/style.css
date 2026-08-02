@@ -25,6 +25,7 @@ nav{
 .logo img{
     height:55px;
     width:auto;
+    display:block;
 }
 
 .menu{
@@ -310,4 +311,33 @@ footer p{
     margin-top: 8px;
     font-size: 12px;
     opacity: 0.6;
+}
+.offer-badge{
+    display:inline-block;
+    background:#16a34a;
+    color:#fff;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:bold;
+    margin:10px 0 15px 0;
+}
+
+/* Gift Card Images */
+.gift-card img{
+    width:90px;
+    height:90px;
+    object-fit:contain;
+    margin-bottom:15px;
+}
+
+/* Gift Card Size */
+.gift-card{
+    min-height:420px;
+    transition:0.3s ease;
+}
+
+/* Hover Effect */
+.gift-card:hover{
+    transform:translateY(-8px);
 }
