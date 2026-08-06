@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gift Finder | iVerxa Finds</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+.finder-box{
+    max-width:700px;
+    margin:60px auto;
+    background:#1E293B;
+    padding:40px;
+    border-radius:20px;
+}
+
+.finder-box h1{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.finder-box label{
+    display:block;
+    margin-top:20px;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+.finder-box select{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:#0F172A;
+    color:white;
+    font-size:16px;
+}
+
+.find-btn{
+    width:100%;
+    margin-top:30px;
+    padding:16px;
+    border:none;
+    border-radius:12px;
+    background:#4F7CFF;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+    <img src="images/logo.jpeg">
+</div>
+
+<ul class="menu">
+<li><a href="index.html">Home</a></li>
+<li><a href="giftcards.html">Gift Cards</a></li>
+</ul>
+
+</nav>
+
+<div class="finder-box">
+
+<h1>🎁 Gift Finder</h1>
+
+<label>Gift For</label>
+
+<select id="relation">
+<option>Select</option>
+<option>Brother</option>
+<option>Sister</option>
+<option>Mother</option>
+<option>Father</option>
+<option>Friend</option>
+<option>Girlfriend</option>
+<option>Boyfriend</option>
+</select>
+
+<label>Age</label>
+
+<select id="age">
+<option>Select</option>
+<option>0-5</option>
+<option>6-12</option>
+<option>13-17</option>
+<option>18-25</option>
+<option>26-40</option>
+<option>40+</option>
+</select>
+
+<label>Budget</label>
+
+<select id="budget">
+<option>Select Budget</option>
+<option>Under ₹500</option>
+<option>₹500 - ₹1000</option>
+<option>₹1000 - ₹2500</option>
+<option>Above ₹2500</option>
+</select>
+
+<label>Occasion</label>
+
+<select id="occasion">
+<option>Select Occasion</option>
+<option>Birthday</option>
+<option>Anniversary</option>
+<option>Friendship Day</option>
+<option>Raksha Bandhan</option>
+<option>Valentine's Day</option>
+<option>Christmas</option>
+<option>New Year</option>
+<option>Festival</option>
+</select>
+
+<button class="find-btn">
+Find Gifts
+</button>
+
+<p style="text-align:center; margin-top:15px; color:#cbd5e1;">
+Choose all options above and click <b>Find Gifts</b>.
+</p>
+
+<div id="results" style="margin-top:40px;"></div>
+
+</div>
+
+</body>
+
+<script>
+
+document.querySelector(".find-btn").addEventListener("click", function(){
+
+let relation=document.getElementById("relation").value;
+let age=document.getElementById("age").value;
+let budget=document.getElementById("budget").value;
+let occasion=document.getElementById("occasion").value;
+
+let result=document.getElementById("results");
+
+if(
+relation=="Brother" &&
+age=="18-25" &&
+budget=="Under ₹500" &&
+occasion=="Birthday"
+){
+
+result.innerHTML=`
+
+<div class="gift-grid">
+
+<div class="gift-card">
+<img src="images/products/watch1.jpg">
+<h3>Peter England Watch</h3>
+<p>Classic Everyday Watch</p>
+<a href="https://fktr.in/2PCt7Rv" target="_blank">View Deal</a>
+</div>
+
+<div class="gift-card">
+<img src="images/products/speaker.jpg">
+<h3>Pharaoh K12 Speaker</h3>
+<p>Bluetooth Karaoke Speaker</p>
+<a href="https://fktr.in/lU3c4AF" target="_blank">View Deal</a>
+</div>
+
+<div class="gift-card">
+<img src="images/products/watch2.jpg">
+<h3>Peter England Watch</h3>
+<p>Premium Analog Watch</p>
+<a href="https://fktr.in/4mE66ek" target="_blank">View Deal</a>
+</div>
+
+<div class="gift-card">
+<img src="images/products/projector.jpg">
+<h3>Astronaut Star Projector</h3>
+<p>Galaxy Night Lamp</p>
+<a href="https://fktr.in/Tb8mY5R" target="_blank">View Deal</a>
+</div>
+
+<div class="gift-card">
+<img src="images/products/saturn.jpg">
+<h3>Saturn Crystal Ball</h3>
+<p>Beautiful Desk Decor</p>
+<a href="https://fktr.in/87EgaG7" target="_blank">View Deal</a>
+</div>
+
+</div>
+
+`;
+
+}
+
+else if(
+relation=="Sister" &&
+age=="18-25" &&
+occasion=="Birthday"
+){
+
+result.innerHTML=`
+
+<div class="gift-grid">
+
+<div class="gift-card">
+<img src="images/products/rabbit.jpg">
+<h3>Rabbit Night Light</h3>
+<p>Cute USB Rechargeable Lamp</p>
+<a href="https://fktr.in/tosKE5q" target="_blank">View Deal</a>
+</div>
+
+<div class="gift-card">
+<img src="images/products/cactus.jpg">
+<h3>Dancing Cactus</h3>
+<p>Singing & Talking Toy</p>
+<a href="https://fktr.in/Wg2rHER" target="_blank">View Deal</a>
+</div>
+
+<div class="gift-card">
+<img src="images/products/astronaut-keychain.jpg">
+<h3>Astronaut Keychain</h3>
+<p>Cute Space Keychain</p>
+<a href="https://fktr.in/GTf82Im" target="_blank">View Deal</a>
+</div>
+
+<div class="gift-card">
+<img src="images/products/tanjiro-keychain.jpg">
+<h3>Tanjiro Keychain</h3>
+<p>Anime Gift</p>
+<a href="https://fktr.in/wRjcwlF" target="_blank">View Deal</a>
+</div>
+
+<div class="gift-card">
+<img src="images/products/spiderman-keychain.jpg">
+<h3>Spider-Man Keychain</h3>
+<p>Marvel Collectible</p>
+<a href="https://fktr.in/T932Nk6" target="_blank">View Deal</a>
+</div>
+
+</div>
+
+`;
+
+}
+
+else{
+
+result.innerHTML=`
+
+<div class="product-card">
+
+<h3>😔 No Perfect Match Found</h3>
+
+<p>
+We're adding new gift recommendations every week.
+Try another budget or relation.
+</p>
+
+<a href="giftcards.html">Browse Gift Cards</a>
+
+</div>
+
+`;
+
+}
+
+});
+
+</script>
+
+</html>
