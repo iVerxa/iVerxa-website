@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | iVerxa Finds</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .contact-container {
+            max-width: 700px;
+            margin: 50px auto;
+            background: #1E293B;
+            padding: 40px;
+            border-radius: 20px;
+        }
+
+        .contact-container h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .contact-container p {
+            text-align: center;
+            color: #CBD5E1;
+            margin-bottom: 30px;
+        }
+
+        .contact-info {
+            background: #0F172A;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .contact-info p {
+            text-align: left;
+            margin: 10px 0;
+            color: #CBD5E1;
+        }
+
+        .contact-info strong {
+            color: #4F7CFF;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: none;
+            background: #0F172A;
+            color: white;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 120px;
+        }
+
+        .send-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 16px;
+            background: #4F7CFF;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .send-btn:hover {
+            background: #3567ff;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">
+        <img src="images/logo.jpeg" alt="iVerxa Logo">
+    </div>
+    <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="giftcards.html">Gift Cards</a></li>
+        <li><a href="giftfinder.html">Gift Finder</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
+
+<div class="contact-container">
+    <h1>Contact Us 📩</h1>
+    <p>Have a question or need support with your order? Reach out to us!</p>
+
+    <div class="contact-info">
+        <p>📧 <strong>Email Support:</strong> iverxafinds@gmail.com</p>
+        <p>⏰ <strong>Working Hours:</strong> Mon - Sat (10:00 AM - 7:00 PM)</p>
+    </div>
+
+    <form action="https://formspree.io/f/mnpajdjg" method="POST">
+        <label>Your Name</label>
+        <input type="text" name="name" placeholder="Enter your name" required>
+
+        <label>Your Email</label>
+        <input type="email" name="email" placeholder="Enter your email address" required>
+
+        <label>Subject / Order ID (Optional)</label>
+        <input type="text" name="subject" placeholder="e.g. Question about Gift Card order">
+
+        <label>Message</label>
+        <textarea name="message" placeholder="Write your message here..." required></textarea>
+
+        <button type="submit" class="send-btn">Send Message</button>
+    </form>
+</div>
+
+<footer class="footer">
+    Crafted with ❤️ in Maharashtra, India 🇮🇳
+    <br><br>
+    © 2026 iVerxa Finds. All Rights Reserved.
+</footer>
+
+</body>
+</html>

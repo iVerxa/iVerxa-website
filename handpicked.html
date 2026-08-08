@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handpicked Products | iVerxa Finds</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 32px;
+            color: #ffffff;
+        }
+
+        .page-desc {
+            text-align: center;
+            color: #CBD5E1;
+            margin-bottom: 25px;
+        }
+
+        /* Search Bar Styling */
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 16px;
+            border-radius: 30px;
+            border: 2px solid #334155;
+            background: #1E293B;
+            color: #ffffff;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #4F7CFF;
+            box-shadow: 0 0 15px rgba(79, 124, 255, 0.4);
+        }
+
+        /* Clean Filter Bar */
+        .filter-bar {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 10px 5px 20px 5px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: #1E293B;
+            color: #CBD5E1;
+            border: 1px solid #334155;
+            padding: 12px 22px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #4F7CFF;
+            color: #ffffff;
+            border-color: #4F7CFF;
+            box-shadow: 0 4px 15px rgba(79, 124, 255, 0.4);
+        }
+
+        /* Grid System */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        /* Product Card Design */
+        .custom-card {
+            background: #1E293B;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            border: 1px solid #334155;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-6px);
+            border-color: #4F7CFF;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Image Zooming Fix: Object Fit Contain */
+        .custom-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: contain;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            background: #0F172A;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .custom-card h3 {
+            font-size: 18px;
+            color: #ffffff;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .custom-card p {
+            font-size: 14px;
+            color: #94A3B8;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .custom-card .deal-btn {
+            display: block;
+            text-align: center;
+            background: #4F7CFF;
+            color: #ffffff;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .custom-card .deal-btn:hover {
+            background: #3567ff;
+        }
+
+        .no-results {
+            text-align: center;
+            color: #CBD5E1;
+            font-size: 18px;
+            grid-column: 1 / -1;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">
+        <img src="images/logo.jpeg" alt="iVerxa Logo">
+    </div>
+    <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="handpicked.html">Handpicked Products</a></li>
+        <li><a href="giftcards.html">Gift Cards</a></li>
+        <li><a href="giftfinder.html">Gift Finder</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h1 class="page-title">🔥 Handpicked Products</h1>
+    <p class="page-desc">Explore top-rated products curated specifically for you.</p>
+
+    <!-- Search Bar -->
+    <div class="search-box">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search products (e.g. watch, bag, perfume, camera)..." onkeyup="searchProducts()">
+    </div>
+
+    <!-- Category Filters -->
+    <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterCategory('Watches', this)">Watches</button>
+        <button class="filter-btn" onclick="filterCategory('Bags', this)">Bags & Accessories</button>
+        <button class="filter-btn" onclick="filterCategory('Perfumes', this)">Perfumes & Fragrances</button>
+        <button class="filter-btn" onclick="filterCategory('Gadgets', this)">Tech & Gadgets</button>
+        <button class="filter-btn" onclick="filterCategory('Decor', this)">Home & Decor</button>
+        <button class="filter-btn" onclick="filterCategory('Collectibles', this)">Collectibles & Keychains</button>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="grid-container" id="products-grid"></div>
+</div>
+
+<footer class="footer">
+    Crafted with ❤️ in Maharashtra, India 🇮🇳
+    <br><br>
+    © 2026 iVerxa Finds. All Rights Reserved.
+</footer>
+
+<script>
+// Categorized Products Database
+const productsData = [
+    // Watches Category
+    { title: "Blue Dial Analog Watch", category: "Watches", keywords: "watch men watch blue analog wrist watch", desc: "Classic Men's Wrist Watch with premium blue dial.", img: "images/products/blue-watch.jpg", link: "https://fktr.in/hw4EuTu" },
+    { title: "Peter England Everyday Watch", category: "Watches", keywords: "watch peter england formal watch", desc: "Classic formal analog watch for daily wear.", img: "images/products/watch1.jpg", link: "https://fktr.in/2PCt7Rv" },
+    { title: "Peter England Premium Watch", category: "Watches", keywords: "watch peter england premium dress watch", desc: "Premium dress watch for special occasions.", img: "images/products/watch2.jpg", link: "https://fktr.in/4mE66ek" },
+
+    // Bags Category
+    { title: "Women Green & White Bag", category: "Bags", keywords: "bag shoulder bag women bag handbag tote", desc: "Trendy & stylish shoulder bag for daily use.", img: "images/products/women-green-bag.jpg", link: "https://fktr.in/7B905x9" },
+    { title: "Pink & Ivory Cotton Tote Bag", category: "Bags", keywords: "bag tote bag cotton bag handbag schoolbag", desc: "Handcrafted woven cotton tote shoulder bag.", img: "images/products/tote-bag.jpg", link: "https://fktr.in/11c1iDx" },
+    { title: "Women Blue Cosmetic Bag", category: "Bags", keywords: "bag cosmetic bag pouch travel pouch makeup", desc: "Compact travel makeup pouch & pouch organizer.", img: "images/products/cosmetic-bag.jpg", link: "https://fktr.in/FfT4LwA" },
+
+    // Perfumes Category
+    { title: "Raw Eau De Parfum (20ml)", category: "Perfumes", keywords: "perfume scent fragrance raw edp", desc: "Compact long-lasting everyday fragrance.", img: "images/products/raw-perfume.jpg", link: "https://fktr.in/YJeHEwk" },
+    { title: "White Oud Unisex Perfume", category: "Perfumes", keywords: "perfume white oud fragrance scent unisex", desc: "Woody, elegant & premium unisex fragrance.", img: "images/products/white-oud.jpg", link: "https://fktr.in/fY2f6cm" },
+    { title: "CEO MAN & White Oud Combo", category: "Perfumes", keywords: "perfume ceo man combo fragrance scent", desc: "Citrus & woody notes long-lasting perfume set.", img: "images/products/ceo-whiteoud.jpg", link: "https://fktr.in/EpZzsXs" },
+    { title: "Hydra Luxury Men Perfume", category: "Perfumes", keywords: "perfume hydra luxury fragrance spray", desc: "100ml fresh aqua long-lasting fragrance spray.", img: "images/products/hydra-perfume.jpg", link: "https://fktr.in/RYUzCy4" },
+
+    // Tech & Gadgets Category
+    { title: "Pharaoh K12 Speaker", category: "Gadgets", keywords: "speaker bluetooth speaker gadget music sound", desc: "Portable Bluetooth karaoke speaker with mic.", img: "images/products/speaker.jpg", link: "https://fktr.in/lU3c4AF" },
+    { title: "Kids Digital Action Camera", category: "Gadgets", keywords: "camera kids camera video gadget digital camera", desc: "2.0\" color display HD video recording camera.", img: "images/products/kids-camera.jpg", link: "https://fktr.in/99BrGav" },
+    { title: "LCD Writing Tablet 8.5\"", category: "Gadgets", keywords: "tablet writing pad digital slate gadget school", desc: "Reusable digital slate board for notes & drawing.", img: "images/writing-tablet.jpg", link: "https://fktr.in/2ilGq4U" },
+
+    // Home & Decor Category
+    { title: "Astronaut Star Projector", category: "Decor", keywords: "lamp projector star galaxy decor light", desc: "3D galaxy laser ambient night light.", img: "images/products/projector.jpg", link: "https://fktr.in/Tb8mY5R" },
+    { title: "Saturn Crystal Ball Decor", category: "Decor", keywords: "decor crystal ball saturn light desk", desc: "Glowing 3D crystal ball desk ornament.", img: "images/products/saturn.jpg", link: "https://fktr.in/87EgaG7" },
+    { title: "Rabbit USB Night Light", category: "Decor", desc: "Cute rechargeable soft silicone desk lamp.", keywords: "lamp night light rabbit decor usb light", img: "images/products/rabbit.jpg", link: "https://fktr.in/tosKE5q" },
+
+    // Collectibles Category
+    { title: "Astronaut Keychain", category: "Collectibles", keywords: "keychain astronaut space collectible key ring", desc: "High-quality metallic space astronaut keychain.", img: "images/products/astronaut-keychain.jpg", link: "https://fktr.in/GTf82Im" },
+    { title: "Tanjiro Anime Keychain", category: "Collectibles", keywords: "keychain tanjiro anime demon slayer collectible", desc: "Demon Slayer Tanjiro anime acrylic keychain.", img: "images/products/tanjiro-keychain.jpg", link: "https://fktr.in/wRjcwlF" },
+    { title: "Spider-Man Keychain", category: "Collectibles", keywords: "keychain spiderman marvel hero collectible", desc: "Marvel official collectible 3D keychain.", img: "images/products/spiderman-keychain.jpg", link: "https://fktr.in/T932Nk6" }
+];
+
+let activeCategory = 'Watches';
+
+function renderCards(data) {
+    const grid = document.getElementById('products-grid');
+    grid.innerHTML = '';
+
+    if (data.length === 0) {
+        grid.innerHTML = `<div class="no-results">🔍 No products found matching your search.</div>`;
+        return;
+    }
+
+    data.forEach(item => {
+        grid.innerHTML += `
+            <div class="custom-card">
+                <div>
+                    <img src="${item.img}" alt="${item.title}">
+                    <h3>${item.title}</h3>
+                    <p>${item.desc}</p>
+                </div>
+                <a href="${item.link}" target="_blank" class="deal-btn">View Deal</a>
+            </div>
+        `;
+    });
+}
+
+function filterCategory(catName, btnEl) {
+    activeCategory = catName;
+    document.getElementById('searchInput').value = ''; // Clear search when switching tabs
+    
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    if(btnEl) btnEl.classList.add('active');
+
+    const filtered = productsData.filter(item => item.category === catName);
+    renderCards(filtered);
+}
+
+function searchProducts() {
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    
+    if (query === '') {
+        // If search is empty, go back to current active category
+        const filtered = productsData.filter(item => item.category === activeCategory);
+        renderCards(filtered);
+        return;
+    }
+
+    // Deactivate category active tab highlight while searching globally
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+
+    // Global Search across all items
+    const searchResults = productsData.filter(item => 
+        item.title.toLowerCase().includes(query) || 
+        item.desc.toLowerCase().includes(query) ||
+        item.keywords.toLowerCase().includes(query)
+    );
+
+    renderCards(searchResults);
+}
+
+// Load Watches by default on startup
+document.addEventListener("DOMContentLoaded", () => {
+    filterCategory('Watches');
+});
+</script>
+
+</body>
+</html>

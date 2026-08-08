@@ -50,6 +50,10 @@
     font-weight:bold;
     cursor:pointer;
 }
+
+.find-btn:hover{
+    background:#3567ff;
+}
 </style>
 
 </head>
@@ -57,16 +61,16 @@
 <body>
 
 <nav>
-
 <div class="logo">
-    <img src="images/logo.jpeg">
+    <img src="images/logo.jpeg" alt="iVerxa Logo">
 </div>
 
 <ul class="menu">
 <li><a href="index.html">Home</a></li>
 <li><a href="giftcards.html">Gift Cards</a></li>
+<li><a href="giftfinder.html">Gift Finder</a></li>
+<li><a href="contact.html">Contact</a></li>
 </ul>
-
 </nav>
 
 <div class="finder-box">
@@ -74,51 +78,44 @@
 <h1>🎁 Gift Finder</h1>
 
 <label>Gift For</label>
-
 <select id="relation">
-<option>Select</option>
-<option>Brother</option>
-<option>Sister</option>
-<option>Mother</option>
-<option>Father</option>
-<option>Friend</option>
-<option>Girlfriend</option>
-<option>Boyfriend</option>
+<option value="ALL">Select Relation</option>
+<option value="Brother">Brother</option>
+<option value="Sister">Sister</option>
+<option value="Mother">Mother</option>
+<option value="Father">Father</option>
+<option value="Friend">Friend</option>
+<option value="Girlfriend">Girlfriend</option>
+<option value="Boyfriend">Boyfriend</option>
 </select>
 
-<label>Age</label>
-
+<label>Age Group</label>
 <select id="age">
-<option>Select</option>
-<option>0-5</option>
-<option>6-12</option>
-<option>13-17</option>
-<option>18-25</option>
-<option>26-40</option>
-<option>40+</option>
+<option value="ALL">Select Age</option>
+<option value="KIDS">0 - 12 Years</option>
+<option value="TEEN">13 - 17 Years</option>
+<option value="YOUNG">18 - 25 Years</option>
+<option value="ADULT">26 - 40 Years</option>
+<option value="SENIOR">40+ Years</option>
 </select>
 
 <label>Budget</label>
-
 <select id="budget">
-<option>Select Budget</option>
-<option>Under ₹500</option>
-<option>₹500 - ₹1000</option>
-<option>₹1000 - ₹2500</option>
-<option>Above ₹2500</option>
+<option value="ALL">Select Budget</option>
+<option value="U500">Under ₹500</option>
+<option value="500-1000">₹500 - ₹1000</option>
+<option value="1000-2500">₹1000 - ₹2500</option>
+<option value="ABOVE2500">Above ₹2500</option>
 </select>
 
 <label>Occasion</label>
-
 <select id="occasion">
-<option>Select Occasion</option>
+<option value="ALL">Select Occasion</option>
 <option>Birthday</option>
 <option>Anniversary</option>
 <option>Friendship Day</option>
 <option>Raksha Bandhan</option>
 <option>Valentine's Day</option>
-<option>Christmas</option>
-<option>New Year</option>
 <option>Festival</option>
 </select>
 
@@ -127,152 +124,86 @@ Find Gifts
 </button>
 
 <p style="text-align:center; margin-top:15px; color:#cbd5e1;">
-Choose all options above and click <b>Find Gifts</b>.
+Select filters above and click <b>Find Gifts</b>.
 </p>
 
 <div id="results" style="margin-top:40px;"></div>
 
 </div>
 
-</body>
+<footer class="footer">
+    Crafted with ❤️ in Maharashtra, India 🇮🇳
+    <br><br>
+    © 2026 iVerxa Finds. All Rights Reserved.
+</footer>
 
 <script>
+const productsList = [
+    // --- UNDER ₹500 ---
+    { title: "Astronaut Keychain", desc: "Cute Space Metallic Keychain", budget: "U500", ageGroup: ["TEEN", "YOUNG"], target: ["Sister", "Girlfriend", "Friend"], img: "images/products/astronaut-keychain.jpg", link: "https://fktr.in/GTf82Im" },
+    { title: "Tanjiro Anime Keychain", desc: "Demon Slayer Collectible Keychain", budget: "U500", ageGroup: ["TEEN", "YOUNG"], target: ["Brother", "Friend", "Sister"], img: "images/products/tanjiro-keychain.jpg", link: "https://fktr.in/wRjcwlF" },
+    { title: "Spider-Man Keychain", desc: "Marvel Official Collectible Keychain", budget: "U500", ageGroup: ["TEEN", "YOUNG"], target: ["Brother", "Friend"], img: "images/products/spiderman-keychain.jpg", link: "https://fktr.in/T932Nk6" },
+    { title: "Raw Eau De Parfum (20ml)", desc: "Pocket Fragrance for Daily Wear", budget: "U500", ageGroup: ["YOUNG", "ADULT"], target: ["Brother", "Boyfriend", "Friend"], img: "images/products/raw-perfume.jpg", link: "https://fktr.in/YJeHEwk" },
+    { title: "White Oud Unisex Perfume", desc: "Woody & Premium Long-Lasting Fragrance", budget: "U500", ageGroup: ["YOUNG", "ADULT", "SENIOR"], target: ["Brother", "Boyfriend", "Sister", "Girlfriend", "Friend", "Father", "Mother"], img: "images/products/white-oud.jpg", link: "https://fktr.in/fY2f6cm" },
+
+    // --- ₹500 - ₹1000 ---
+    { title: "Dancing Cactus Toy", desc: "Singing & Talking Interactive Toy", budget: "500-1000", ageGroup: ["KIDS"], target: ["Brother", "Sister", "Friend"], img: "images/products/cactus.jpg", link: "https://fktr.in/Wg2rHER" },
+    { title: "Rabbit USB Night Light", desc: "Cute Silicone Night Lamp", budget: "500-1000", ageGroup: ["KIDS", "TEEN"], target: ["Sister", "Girlfriend", "Friend"], img: "images/products/rabbit.jpg", link: "https://fktr.in/tosKE5q" },
+    { title: "Pharaoh K12 Speaker", desc: "Wireless Bluetooth Karaoke Speaker", budget: "500-1000", ageGroup: ["TEEN", "YOUNG"], target: ["Brother", "Sister", "Friend"], img: "images/products/speaker.jpg", link: "https://fktr.in/lU3c4AF" },
+    { title: "CEO MAN & White Oud Combo", desc: "Luxury Fragrance Gift Set (40ml)", budget: "500-1000", ageGroup: ["YOUNG", "ADULT", "SENIOR"], target: ["Brother", "Boyfriend", "Father", "Friend"], img: "images/products/ceo-whiteoud.jpg", link: "https://fktr.in/EpZzsXs" },
+    { title: "Hydra Luxury Men Perfume", desc: "Fresh Aqua EDP Spray (100ml)", budget: "500-1000", ageGroup: ["YOUNG", "ADULT", "SENIOR"], target: ["Brother", "Boyfriend", "Father", "Friend"], img: "images/products/hydra-perfume.jpg", link: "https://fktr.in/RYUzCy4" },
+    { title: "Blue Dial Analog Watch", desc: "Classic Stainless Steel Wrist Watch", budget: "500-1000", ageGroup: ["YOUNG", "ADULT", "SENIOR"], target: ["Brother", "Boyfriend", "Father", "Friend"], img: "images/products/blue-watch.jpg", link: "https://fktr.in/hw4EuTu" },
+    { title: "Peter England Everyday Watch", desc: "Elegant Formal Men's Watch", budget: "500-1000", ageGroup: ["YOUNG", "ADULT", "SENIOR"], target: ["Brother", "Boyfriend", "Father"], img: "images/products/watch1.jpg", link: "https://fktr.in/2PCt7Rv" },
+    { title: "Women Green & White Bag", desc: "Stylish Shoulder Handbag", budget: "500-1000", ageGroup: ["YOUNG", "ADULT", "SENIOR"], target: ["Sister", "Girlfriend", "Mother"], img: "images/products/women-green-bag.jpg", link: "https://fktr.in/7B905x9" },
+    { title: "Pink & Ivory Cotton Tote Bag", desc: "Handcrafted Woven Shoulder Bag", budget: "500-1000", ageGroup: ["YOUNG", "ADULT", "SENIOR"], target: ["Sister", "Girlfriend", "Mother"], img: "images/products/tote-bag.jpg", link: "https://fktr.in/11c1iDx" },
+    { title: "Women Blue Cosmetic Bag", desc: "Travel Toiletries & Makeup Pouch", budget: "500-1000", ageGroup: ["YOUNG", "ADULT", "SENIOR"], target: ["Sister", "Girlfriend", "Mother"], img: "images/products/cosmetic-bag.jpg", link: "https://fktr.in/FfT4LwA" },
+
+    // --- ₹1000 - ₹2500 ---
+    { title: "Kids Digital Action Camera", desc: "2.0\" Display & Video Recording", budget: "1000-2500", ageGroup: ["KIDS"], target: ["Brother", "Sister"], img: "images/products/kids-camera.jpg", link: "https://fktr.in/99BrGav" },
+    { title: "Astronaut Star Projector", desc: "3D Galaxy Ambient Night Lamp", budget: "1000-2500", ageGroup: ["TEEN", "YOUNG"], target: ["Brother", "Sister", "Friend", "Girlfriend", "Boyfriend"], img: "images/products/projector.jpg", link: "https://fktr.in/Tb8mY5R" },
+    { title: "Peter England Premium Watch", desc: "Luxury Analog Dress Watch", budget: "1000-2500", ageGroup: ["ADULT", "SENIOR"], target: ["Brother", "Boyfriend", "Father"], img: "images/products/watch2.jpg", link: "https://fktr.in/4mE66ek" },
+    { title: "Saturn Crystal Ball Decor", desc: "3D Glowing Crystal Desk Decor", budget: "1000-2500", ageGroup: ["YOUNG", "ADULT", "SENIOR"], target: ["Brother", "Sister", "Friend", "Father", "Mother"], img: "images/products/saturn.jpg", link: "https://fktr.in/87EgaG7" }
+];
 
 document.querySelector(".find-btn").addEventListener("click", function(){
 
-let relation=document.getElementById("relation").value;
-let age=document.getElementById("age").value;
-let budget=document.getElementById("budget").value;
-let occasion=document.getElementById("occasion").value;
+    let selectedRelation = document.getElementById("relation").value;
+    let selectedAge = document.getElementById("age").value;
+    let selectedBudget = document.getElementById("budget").value;
+    let result = document.getElementById("results");
 
-let result=document.getElementById("results");
+    let filteredProducts = productsList.filter(item => {
+        let budgetMatch = (selectedBudget === "ALL" || item.budget === selectedBudget);
+        let ageMatch = (selectedAge === "ALL" || item.ageGroup.includes(selectedAge));
+        let relationMatch = (selectedRelation === "ALL" || item.target.includes(selectedRelation));
 
-if(
-relation=="Brother" &&
-age=="18-25" &&
-budget=="Under ₹500" &&
-occasion=="Birthday"
-){
+        return budgetMatch && ageMatch && relationMatch;
+    });
 
-result.innerHTML=`
-
-<div class="gift-grid">
-
-<div class="gift-card">
-<img src="images/products/watch1.jpg">
-<h3>Peter England Watch</h3>
-<p>Classic Everyday Watch</p>
-<a href="https://fktr.in/2PCt7Rv" target="_blank">View Deal</a>
-</div>
-
-<div class="gift-card">
-<img src="images/products/speaker.jpg">
-<h3>Pharaoh K12 Speaker</h3>
-<p>Bluetooth Karaoke Speaker</p>
-<a href="https://fktr.in/lU3c4AF" target="_blank">View Deal</a>
-</div>
-
-<div class="gift-card">
-<img src="images/products/watch2.jpg">
-<h3>Peter England Watch</h3>
-<p>Premium Analog Watch</p>
-<a href="https://fktr.in/4mE66ek" target="_blank">View Deal</a>
-</div>
-
-<div class="gift-card">
-<img src="images/products/projector.jpg">
-<h3>Astronaut Star Projector</h3>
-<p>Galaxy Night Lamp</p>
-<a href="https://fktr.in/Tb8mY5R" target="_blank">View Deal</a>
-</div>
-
-<div class="gift-card">
-<img src="images/products/saturn.jpg">
-<h3>Saturn Crystal Ball</h3>
-<p>Beautiful Desk Decor</p>
-<a href="https://fktr.in/87EgaG7" target="_blank">View Deal</a>
-</div>
-
-</div>
-
-`;
-
-}
-
-else if(
-relation=="Sister" &&
-age=="18-25" &&
-occasion=="Birthday"
-){
-
-result.innerHTML=`
-
-<div class="gift-grid">
-
-<div class="gift-card">
-<img src="images/products/rabbit.jpg">
-<h3>Rabbit Night Light</h3>
-<p>Cute USB Rechargeable Lamp</p>
-<a href="https://fktr.in/tosKE5q" target="_blank">View Deal</a>
-</div>
-
-<div class="gift-card">
-<img src="images/products/cactus.jpg">
-<h3>Dancing Cactus</h3>
-<p>Singing & Talking Toy</p>
-<a href="https://fktr.in/Wg2rHER" target="_blank">View Deal</a>
-</div>
-
-<div class="gift-card">
-<img src="images/products/astronaut-keychain.jpg">
-<h3>Astronaut Keychain</h3>
-<p>Cute Space Keychain</p>
-<a href="https://fktr.in/GTf82Im" target="_blank">View Deal</a>
-</div>
-
-<div class="gift-card">
-<img src="images/products/tanjiro-keychain.jpg">
-<h3>Tanjiro Keychain</h3>
-<p>Anime Gift</p>
-<a href="https://fktr.in/wRjcwlF" target="_blank">View Deal</a>
-</div>
-
-<div class="gift-card">
-<img src="images/products/spiderman-keychain.jpg">
-<h3>Spider-Man Keychain</h3>
-<p>Marvel Collectible</p>
-<a href="https://fktr.in/T932Nk6" target="_blank">View Deal</a>
-</div>
-
-</div>
-
-`;
-
-}
-
-else{
-
-result.innerHTML=`
-
-<div class="product-card">
-
-<h3>😔 No Perfect Match Found</h3>
-
-<p>
-We're adding new gift recommendations every week.
-Try another budget or relation.
-</p>
-
-<a href="giftcards.html">Browse Gift Cards</a>
-
-</div>
-
-`;
-
-}
+    if (filteredProducts.length > 0) {
+        let cardsHTML = '<div class="gift-grid">';
+        filteredProducts.forEach(prod => {
+            cardsHTML += `
+            <div class="gift-card">
+                <img src="${prod.img}">
+                <h3>${prod.title}</h3>
+                <p>${prod.desc}</p>
+                <a href="${prod.link}" target="_blank">View Deal</a>
+            </div>`;
+        });
+        cardsHTML += '</div>';
+        result.innerHTML = cardsHTML;
+    } else {
+        result.innerHTML = `
+        <div class="product-card">
+            <h3>😔 No Exact Gift Match Found</h3>
+            <p>Try selecting 'Select Budget' or 'Select Age' to view all recommended gifts for this relation.</p>
+            <a href="giftcards.html">Browse Gift Cards</a>
+        </div>`;
+    }
 
 });
-
 </script>
 
+</body>
 </html>
