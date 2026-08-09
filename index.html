@@ -4,18 +4,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iVerxa Finds | Handpicked Products & Gift Cards</title>
+    <title>iVerxa Finds | Curated Deals & Smart Recommendations</title>
 
     <meta name="google-site-verification" content="LijkkL2CSjMQVJbNlQ_ZaYyhvx5YOYmb2FTAO7LZ7fs" />
+    <meta name="description" content="Discover handpicked products, digital gift cards, and smart gift recommendations curated by Sairaj Halkanche.">
 
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        :root {
+            --bg-dark: #080C14;
+            --card-bg: #111827;
+            --accent-blue: #4F7CFF;
+            --accent-cyan: #38BDF8;
+            --border-glow: #1F293D;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Logo Fix */
+        .logo img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            padding: 85px 20px 60px 20px;
+            text-align: center;
+            background: radial-gradient(circle at 50% 25%, rgba(79, 124, 255, 0.18) 0%, rgba(8, 12, 20, 1) 70%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-title {
+            font-size: 54px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin: 0 auto 20px auto;
+            max-width: 850px;
+            letter-spacing: -1.5px;
+            background: linear-gradient(180deg, #FFFFFF 0%, #CBD5E1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 620px;
+            margin: 0 auto 35px auto;
+            line-height: 1.6;
+        }
+
+        /* Buttons */
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4F7CFF 0%, #3567FF 100%);
+            color: #FFFFFF;
+            padding: 15px 34px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(79, 124, 255, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(79, 124, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(17, 24, 39, 0.8);
+            color: var(--text-main);
+            border: 1px solid var(--border-glow);
+            padding: 15px 34px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-3px);
+        }
+
+        /* Live Activity & Engagement Counter Bar */
+        .live-counter-bar {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            background: rgba(17, 24, 39, 0.6);
+            border: 1px solid var(--border-glow);
+            padding: 22px 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .counter-item {
+            text-align: center;
+        }
+
+        .counter-number {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .counter-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        /* Feature Cards Section */
+        .main-container {
+            max-width: 1150px;
+            margin: 70px auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-header h2 {
+            font-size: 34px;
+            color: #FFFFFF;
+            margin: 0 0 10px 0;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 35px 30px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 12px 30px rgba(79, 124, 255, 0.2);
+        }
+
+        .icon-box {
+            font-size: 34px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            color: #FFFFFF;
+            margin: 0 0 12px 0;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 0 0 25px 0;
+        }
+
+        .card-action {
+            color: var(--accent-cyan);
+            font-weight: 700;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Creator Footer Banner */
+        .creator-banner {
+            background: linear-gradient(135deg, #111827 0%, #0B0F19 100%);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 35px 40px;
+            margin-top: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .creator-banner h3 {
+            font-size: 22px;
+            color: #FFFFFF;
+            margin: 0 0 6px 0;
+        }
+
+        .creator-banner p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 36px; }
+            .hero-subtitle { font-size: 16px; }
+            .live-counter-bar { grid-template-columns: 1fr 1fr; }
+            .creator-banner { text-align: center; justify-content: center; }
+        }
+    </style>
 </head>
 
 <body>
 
+    <!-- Navigation Bar -->
     <nav>
         <div class="logo">
-            <img src="images/logo.jpeg" alt="Logo">
+            <!-- Transparent PNG Logo -->
+            <a href="index.html">
+                <img src="images/logo.png" alt="iVerxa Finds Logo" onerror="this.src='images/logo.jpeg'">
+            </a>
         </div>
 
         <ul class="menu">
@@ -28,59 +286,99 @@
         </ul>
     </nav>
 
-    <section class="hero">
-        <h1>Find Better.<br>Spend Smarter.</h1>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1 class="hero-title">
+            Find Better Deals.<br>Spend Smarter Every Day.
+        </h1>
 
-        <p>
-            Discover handpicked products,
-            gift cards and digital finds —
-            all in one place.
+        <p class="hero-subtitle">
+            Explore handpicked products, instant digital gift cards, and smart age-based gift recommendations in one place.
         </p>
 
-        <div class="buttons">
-            <a href="handpicked.html">Explore Handpicked</a>
-            <a href="giftfinder.html">Gift Finder</a>
+        <div class="cta-group">
+            <a href="handpicked.html" class="btn-primary">Explore Products 🔥</a>
+            <a href="giftfinder.html" class="btn-secondary">Launch Gift Finder 🔍</a>
+        </div>
+
+        <!-- Live Platform Activity Stats Bar -->
+        <div class="live-counter-bar">
+            <div class="counter-item">
+                <span class="counter-number">1,250+</span>
+                <span class="counter-label">Product Clicks</span>
+            </div>
+            <div class="counter-item">
+                <span class="counter-number">100%</span>
+                <span class="counter-label">Verified Deals</span>
+            </div>
+            <div class="counter-item">
+                <span class="counter-number">19+</span>
+                <span class="counter-label">Curated Items</span>
+            </div>
         </div>
     </section>
 
-    <section class="categories">
-        <h2>Browse Categories</h2>
+    <!-- Main Categories Grid -->
+    <main class="main-container">
+        
+        <div class="section-header">
+            <h2>Browse Categories</h2>
+            <p>Select a category below to discover deals</p>
+        </div>
 
-        <div class="category-grid">
+        <div class="feature-grid">
 
-            <a href="handpicked.html" class="category-link">
-                <div class="category-card">
-                    <span>✨</span>
+            <!-- Card 1: Handpicked -->
+            <a href="handpicked.html" class="feature-card">
+                <div>
+                    <span class="icon-box">✨</span>
                     <h3>Handpicked Products</h3>
-                    <p>Curated top deals</p>
+                    <p>Top-rated watches, fragrances, bags, gadgets, and decor items with instant search and filters.</p>
                 </div>
+                <span class="card-action">Browse Collection &rarr;</span>
             </a>
 
-            <a href="giftcards.html" class="category-link">
-                <div class="category-card">
-                    <span>🎁</span>
-                    <h3>Gift Cards</h3>
-                    <p>Top digital gift cards</p>
+            <!-- Card 2: Gift Finder -->
+            <a href="giftfinder.html" class="feature-card">
+                <div>
+                    <span class="icon-box">🔍</span>
+                    <h3>Smart Gift Finder</h3>
+                    <p>Find age-appropriate and budget-friendly gift ideas tailored for family, friends, or loved ones.</p>
                 </div>
+                <span class="card-action">Find Gifts &rarr;</span>
             </a>
 
-            <a href="giftfinder.html" class="category-link">
-                <div class="category-card">
-                    <span>🔍</span>
-                    <h3>Gift Finder</h3>
-                    <p>Find gifts by age & relation</p>
+            <!-- Card 3: Gift Cards -->
+            <a href="giftcards.html" class="feature-card">
+                <div>
+                    <span class="icon-box">🎁</span>
+                    <h3>Digital Gift Cards</h3>
+                    <p>Access instant digital gift vouchers and cards for shopping, entertainment, and gaming platforms.</p>
                 </div>
+                <span class="card-action">Explore Cards &rarr;</span>
             </a>
 
         </div>
-    </section>
 
+        <!-- Creator Banner -->
+        <div class="creator-banner">
+            <div>
+                <h3>Created by Sairaj Halkanche</h3>
+                <p>Designed for a fast, clean, and distraction-free shopping experience.</p>
+            </div>
+            <a href="about.html" class="btn-secondary" style="padding: 12px 24px; font-size: 14px;">About Platform &rarr;</a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
     <footer class="footer">
-        Crafted with ❤️ in Maharashtra, India 🇮🇳
+        Crafted with ❤️ by Sairaj Halkanche in Maharashtra, India 🇮🇳
         <br><br>
         <span>© 2026 iVerxa Finds. All Rights Reserved.</span>
     </footer>
 
     <script src="js/script.js"></script>
 </body>
+
 </html>
