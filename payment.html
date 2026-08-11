@@ -1,215 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ========================================================================== -->
+    <!-- 1. APPLICATION METADATA & CONFIGURATION                                    -->
+    <!-- ========================================================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#030712">
+    <meta name="description" content="iVerxa Finds - Secure Payment Gateway">
+    <meta name="author" content="iVerxa Finds Development Team">
+    
+    <title>Payment | iVerxa Finds</title>
+    
+    <!-- EXTERNAL STYLESHEET LINK -->
+    <link rel="stylesheet" href="css/style.css">
 
-<title>Payment | iVerxa Finds</title>
+    <!-- ========================================================================== -->
+    <!-- 2. ULTRA-PREMIUM PAYMENT STUDIO CSS ARCHITECTURE                           -->
+    <!-- ========================================================================== -->
+    <style>
+        :root {
+            --bg-deep: #030712;
+            --bg-card: rgba(15, 23, 42, 0.85);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-active: #6366F1;
+            
+            --gradient-blue-purple: linear-gradient(135deg, #6366F1 0%, #A855F7 100%);
+            --gradient-hero-text: linear-gradient(135deg, #FFFFFF 0%, #C7D2FE 40%, #A855F7 80%, #F43F5E 100%);
+            
+            --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 30px;
+            --radius-pill: 50px;
+            
+            --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(99, 102, 241, 0.15);
+            --transition-smooth: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --backdrop-blur: blur(25px);
+        }
 
-<link rel="stylesheet" href="css/style.css">
+        html {
+            box-sizing: border-box;
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
 
-<style>
+        *, *::before, *::after {
+            box-sizing: inherit;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-base);
+            -webkit-font-smoothing: antialiased;
+        }
 
-.payment-container{
-max-width:900px;
-margin:50px auto;
-background:#1E293B;
-padding:40px;
-border-radius:20px;
-text-align:center;
-}
+        body {
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+            background-attachment: fixed;
+            color: #FFFFFF;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-.payment-container h1{
-font-size:45px;
-margin-bottom:15px;
-}
+        a { color: inherit; text-decoration: none; }
+        button { background: none; border: none; font: inherit; cursor: pointer; outline: none; }
+        img { max-width: 100%; height: auto; display: block; }
 
-.payment-container p{
-color:#CBD5E1;
-margin-bottom:30px;
-}
+        /* Logo Fix */
+        .logo img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        .logo img:hover { transform: scale(1.05); }
 
-.qr{
-width:320px;
-border-radius:20px;
-margin:20px auto;
-display:block;
-}
+        /* Payment Container Layout */
+        .payment-container {
+            max-width: 750px;
+            margin: 60px auto;
+            background: var(--bg-card);
+            backdrop-filter: var(--backdrop-blur);
+            -webkit-backdrop-filter: var(--backdrop-blur);
+            padding: 45px;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            box-shadow: var(--shadow-card);
+            text-align: center;
+            position: relative;
+        }
 
-.upi-box{
+        .payment-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #6366F1, #A855F7, transparent);
+        }
 
-background:#0F172A;
-padding:18px;
-border-radius:12px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-top:30px;
+        .product-brand-icon {
+            width: 75px;
+            height: 75px;
+            object-fit: contain;
+            margin: 0 auto 15px auto;
+            background: #070B14;
+            padding: 10px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-}
+        .payment-container h1 {
+            font-size: 32px;
+            font-weight: 900;
+            background: var(--gradient-hero-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
 
-.upi-box span{
+        .payment-container p {
+            color: #94A3B8;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
 
-font-size:22px;
-font-weight:bold;
+        /* QR Code Styling */
+        .qr-box {
+            background: #070B14;
+            padding: 15px;
+            border-radius: 20px;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 25px;
+        }
 
-}
+        .qr {
+            width: 240px;
+            height: 240px;
+            border-radius: 12px;
+            display: block;
+            object-fit: cover;
+        }
 
-.copy-btn{
+        /* UPI Box */
+        .upi-box {
+            background: rgba(3, 7, 18, 0.85);
+            padding: 14px 20px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
 
-background:#4F7CFF;
-color:white;
-border:none;
-padding:12px 22px;
-border-radius:10px;
-cursor:pointer;
-font-size:16px;
+        .upi-box span {
+            font-size: 18px;
+            font-weight: 700;
+            color: #38BDF8;
+            letter-spacing: 0.5px;
+        }
 
-}
+        .copy-btn {
+            background: var(--gradient-blue-purple);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 800;
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
 
-.copy-btn:hover{
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.6);
+        }
 
-background:#3567ff;
+        /* Notes Box */
+        .notes {
+            margin-top: 35px;
+            background: rgba(3, 7, 18, 0.6);
+            border: 1px solid var(--border-subtle);
+            padding: 24px;
+            border-radius: 16px;
+            text-align: left;
+        }
 
-}
+        .notes h2 {
+            font-size: 15px;
+            font-weight: 800;
+            color: #38BDF8;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
-.notes{
+        .notes ul {
+            padding-left: 18px;
+            color: #94A3B8;
+            font-size: 13px;
+            line-height: 1.7;
+        }
 
-margin-top:40px;
-background:#111827;
-padding:25px;
-border-radius:15px;
-text-align:left;
+        .notes li {
+            margin-bottom: 8px;
+        }
 
-}
+        .notes b {
+            color: #E2E8F0;
+        }
 
-.notes h2{
+        /* I Have Paid Button */
+        .pay-btn {
+            display: block;
+            text-decoration: none;
+            margin-top: 35px;
+            background: var(--gradient-blue-purple);
+            padding: 16px;
+            border-radius: var(--radius-pill);
+            color: white;
+            font-size: 18px;
+            font-weight: 800;
+            text-align: center;
+            transition: var(--transition-smooth);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+        }
 
-margin-bottom:15px;
+        .pay-btn:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.6);
+        }
 
-}
-
-.notes li{
-
-margin-bottom:12px;
-color:#CBD5E1;
-
-}
-
-.pay-btn{
-
-display:block;
-text-decoration:none;
-margin-top:40px;
-background:#4F7CFF;
-padding:18px;
-border-radius:12px;
-color:white;
-font-size:22px;
-font-weight:bold;
-
-}
-
-.pay-btn:hover{
-
-background:#3567ff;
-
-}
-
-</style>
-
+        @media (max-width: 768px) {
+            .payment-container { padding: 25px; margin: 30px 15px; }
+            .qr { width: 200px; height: 200px; }
+        }
+    </style>
 </head>
-
 <body>
 
+<!-- Navigation Bar -->
 <nav>
-
-<div class="logo">
-<img src="images/logo.jpeg">
-</div>
-
-<ul class="menu">
-
-<li><a href="index.html">Home</a></li>
-
-</ul>
-
+    <div class="logo">
+        <a href="index.html">
+            <img src="images/logo.jpeg" alt="iVerxa Logo">
+        </a>
+    </div>
+    <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="giftcards.html">Gift Cards</a></li>
+    </ul>
 </nav>
 
+<!-- Payment Studio Container -->
 <div class="payment-container">
+    <img src="images/google-play.png" alt="Brand Logo" class="product-brand-icon" id="brandIcon">
+    
+    <h1 id="paymentTitle">Digital Gift Card Payment</h1>
+    
+    <p>Scan the secure QR Code below using any preferred UPI application (GPay, PhonePe, Paytm, FamPay) to finalize your payment.</p>
 
-<img src="images/google-play.png" width="90">
+    <div class="qr-box">
+        <img src="images/payment-qr.jpg" alt="Payment QR Code" class="qr">
+    </div>
 
-<h1>Google Play Gift Card</h1>
+    <div class="upi-box">
+        <span id="upi">sairajhalkanche@fam</span>
+        <button class="copy-btn" onclick="copyUPI()">Copy UPI</button>
+    </div>
 
-<p>
+    <div class="notes">
+        <h2>Important Verification Guidelines</h2>
+        <ul>
+            <li>Ensure you transfer the exact payable amount corresponding to your selected gift card voucher.</li>
+            <li>Complete your transfer securely via the provided QR code or official UPI ID.</li>
+            <li>Immediately after a successful money transfer, click on the <b>I Have Paid</b> button below.</li>
+            <li>Your payment reference will go through security and manual validation checks.</li>
+            <li>Your official Gift Card code voucher will be dispatched directly to your registered email and mobile number.</li>
+            <li>Standard dispatch timing takes up to <b>2 business days</b> post-verification (most orders clear instantly).</li>
+            <li>Please refrain from submitting duplicate or multiple transfers for the same transaction reference.</li>
+            <li>All digital gift card purchases are final and non-refundable once the code has been successfully issued.</li>
+        </ul>
+    </div>
 
-Scan the QR Code below to complete your payment.
-
-</p>
-
-<img src="images/payment-qr.jpg" class="qr">
-
-<div class="upi-box">
-
-<span id="upi">
-
-sairajhalkanche@fam
-
-</span>
-
-<button class="copy-btn" onclick="copyUPI()">
-
-Copy
-
-</button>
-
+    <a href="transaction.html" class="pay-btn">
+        I Have Paid 🚀
+    </a>
 </div>
 
-<div class="notes">
-
-<h2>Important Notes</h2>
-
-<ul>
-
-<li>Complete your payment using the QR code or UPI ID above.</li>
-
-<li>After payment, click on <b>I Have Paid</b>.</li>
-
-<li>Your payment will be verified manually.</li>
-
-<li>Your Google Play Gift Card code will be delivered to your registered email address and phone number.</li>
-
-<li>Delivery may take up to <b>2 business days</b> after successful payment verification.</li>
-
-<li>Please do not make duplicate payments.</li>
-
-<li>All sales are final and cannot be refunded after delivery.</li>
-
-</ul>
-
-</div>
-<a href="transaction.html" class="pay-btn">
-I Have Paid
-</a>
-
-</div>
-
+<!-- JavaScript: Copy UPI Animation -->
 <script>
-
 function copyUPI(){
-
-const upi=document.getElementById("upi").innerText;
-
-navigator.clipboard.writeText(upi);
-
-alert("UPI ID Copied Successfully!");
-
+    const upiText = document.getElementById("upi").innerText;
+    navigator.clipboard.writeText(upiText);
+    
+    const copyButton = document.querySelector(".copy-btn");
+    copyButton.innerText = "Copied! ✓";
+    copyButton.style.background = "#34D399";
+    
+    setTimeout(() => {
+        copyButton.innerText = "Copy UPI";
+        copyButton.style.background = "";
+    }, 2000);
 }
-
 </script>
 
 </body>
-
 </html>

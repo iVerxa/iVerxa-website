@@ -1,363 +1,677 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- ========================================================================== -->
+    <!-- 1. APPLICATION METADATA & CONFIGURATION                                    -->
+    <!-- ========================================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gift Cards | iVerxa Finds</title>
-
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#030712">
+    <meta name="description" content="iVerxa Finds - Instant Digital Gift Cards Studio with Maximum Discounts">
+    <meta name="author" content="iVerxa Finds Development Team">
+    
+    <title>Digital Gift Cards | iVerxa Finds</title>
+    
+    <!-- EXTERNAL STYLESHEET LINK -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- ========================================================================== -->
+    <!-- 2. ULTRA-PREMIUM CSS STYLING & DYNAMIC SORTING ARCHITECTURE                 -->
+    <!-- ========================================================================== -->
+    <style>
+        :root {
+            --bg-deep: #030712;
+            --bg-card: rgba(15, 23, 42, 0.78);
+            --bg-card-hover: rgba(30, 41, 59, 0.9);
+            
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-active: #6366F1;
+            
+            --gradient-blue-purple: linear-gradient(135deg, #6366F1 0%, #A855F7 100%);
+            --gradient-hero-text: linear-gradient(135deg, #FFFFFF 0%, #C7D2FE 40%, #A855F7 80%, #F43F5E 100%);
+            --gradient-footer-text: linear-gradient(270deg, #38BDF8, #A855F7, #F43F5E, #38BDF8);
+            
+            --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 30px;
+            --radius-pill: 50px;
+            
+            --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --shadow-hover: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(99, 102, 241, 0.3);
+            
+            --transition-smooth: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --backdrop-blur: blur(25px);
+        }
+
+        html {
+            box-sizing: border-box;
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        *, *::before, *::after {
+            box-sizing: inherit;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-base);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+            background-attachment: fixed;
+            color: #FFFFFF;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        button { background: none; border: none; font: inherit; cursor: pointer; outline: none; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* Logo Fix */
+        .logo img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        .logo img:hover { transform: scale(1.05); }
+
+        /* Section Layout */
+        .gift-cards-studio {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .studio-header-box {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .studio-title {
+            font-size: 42px;
+            font-weight: 900;
+            background: var(--gradient-hero-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .studio-desc {
+            color: #94A3B8;
+            font-size: 17px;
+            max-width: 580px;
+            margin: 0 auto;
+        }
+
+        /* Grid System */
+        .gift-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 25px;
+        }
+
+        /* Premium Gift Card Design */
+        .gift-card {
+            background: var(--bg-card);
+            backdrop-filter: var(--backdrop-blur);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition-smooth);
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-card);
+            position: relative;
+        }
+
+        .gift-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-active);
+            box-shadow: var(--shadow-hover);
+            background: var(--bg-card-hover);
+        }
+
+        .card-img-box {
+            width: 100%;
+            height: 160px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 16px;
+            background: #070B14;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .gift-card img {
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            transition: transform 0.4s ease;
+        }
+
+        .gift-card:hover img {
+            transform: scale(1.06);
+        }
+
+        /* Offer Badge Styling - Fully Visible */
+        .offer-badge {
+            display: inline-block;
+            background: rgba(244, 63, 94, 0.15);
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            color: #FB7185;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            width: fit-content;
+        }
+
+        .gift-card h3 {
+            font-size: 20px;
+            color: #ffffff;
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+
+        /* Custom Dropdown Styling */
+        .gift-card select {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(3, 7, 18, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            outline: none;
+            margin-bottom: 16px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .gift-card select:focus {
+            border-color: var(--border-active);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Pricing Area */
+        .price-info {
+            font-size: 15px;
+            color: #CBD5E1;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .final-price {
+            color: #34D399;
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .save-info {
+            font-size: 12px;
+            color: #38BDF8;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .stock {
+            font-size: 13px;
+            color: #34D399;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        /* Buy Now Button */
+        .gift-card a.buy-btn {
+            display: block;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            padding: 13px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 14px;
+            transition: var(--transition-smooth);
+        }
+
+        .gift-card a.buy-btn:hover {
+            background: var(--gradient-blue-purple);
+            border-color: transparent;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+        }
+
+        /* ---------------------------------------------------------------------- */
+        /* UNIQUE CYBER-PUNK TRUST FOOTER                                         */
+        /* ---------------------------------------------------------------------- */
+        .cyber-trust-footer {
+            background: #040710;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 60px 20px 40px 20px;
+            margin-top: 90px;
+        }
+
+        .footer-grid-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-widget h4 {
+            font-size: 15px;
+            font-weight: 800;
+            color: #FFFFFF;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-widget p {
+            color: #94A3B8;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer-nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-nav-links li a {
+            color: #94A3B8;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-nav-links li a:hover {
+            color: #38BDF8;
+        }
+
+        .security-badge-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34D399;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .footer-terminal-bar {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .footer-terminal-bar p {
+            color: #64748B;
+            font-size: 13px;
+        }
+
+        .scroll-top-trigger {
+            color: #6366F1;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .scroll-top-trigger:hover {
+            color: #A855F7;
+        }
+
+        @media (max-width: 768px) {
+            .studio-title { font-size: 32px; }
+            .footer-terminal-bar { flex-direction: column; text-align: center; }
+        }
+    </style>
 </head>
 <body>
 
+<!-- Navigation Bar -->
 <nav>
-
-<div class="logo">
-    <img src="images/logo.jpeg" alt="iVerxa Logo">
-</div>
-
-<ul class="menu">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="handpicked.html">Handpicked Products</a></li>
-    <li><a href="giftcards.html">Gift Cards</a></li>
-    <li><a href="giftfinder.html">Gift Finder</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="about.html">About Us</a></li>
-</ul>
-
+    <div class="logo">
+        <a href="index.html">
+            <img src="images/logo.png" alt="iVerxa Logo">
+        </a>
+    </div>
+    <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="handpicked.html">Handpicked Products</a></li>
+        <li><a href="giftcards.html">Gift Cards</a></li>
+        <li><a href="giftfinder.html">Gift Finder</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="about.html">About Us</a></li>
+    </ul>
 </nav>
 
-<section class="gift-cards">
-
-<h2>Gift Cards</h2>
-
-<div class="gift-grid">
-
-<!-- Google Play -->
-
-<div class="gift-card" data-discount="2">
-
-<img src="images/google-play.png">
-
-<h3>Google Play</h3>
-
-<p class="offer-badge"></p>
-
-<select>
-
-<option>Select Amount</option>
-<option>₹50</option>
-<option>₹100</option>
-<option>₹200</option>
-<option>₹500</option>
-<option>₹1000</option>
-
-</select>
-
-<p class="price-info">
-    You Pay: <span class="final-price">₹0</span>
-</p>
-
-<p class="stock">🟢 In Stock</p>
-
-<a href="buyer-details.html">Buy Now</a>
-
-</div>
-
-<!-- Amazon -->
-
-<div class="gift-card" data-discount="1">
-
-<img src="images/amazon.png">
-
-<h3>Amazon Pay</h3>
-
-<p class="offer-badge"></p>
-
-<select>
-
-<option>Select Amount</option>
-<option>₹100</option>
-<option>₹250</option>
-<option>₹500</option>
-<option>₹1000</option>
-
-</select>
-
-<p class="price-info">
-    You Pay: <span class="final-price">₹0</span>
-</p>
-
-<p class="stock">🟢 In Stock</p>
-
-<a href="buyer-details.html">Buy Now</a>
-
-</div>
-
-<!-- Steam -->
-
-<div class="gift-card" data-discount="2">
-
-<img src="images/steam.png">
-
-<h3>Steam</h3>
-
-<p class="offer-badge"></p>
-
-<select>
-
-<option>Select Amount</option>
-<option>₹250</option>
-<option>₹500</option>
-<option>₹1000</option>
-
-</select>
-
-<p class="price-info">
-    You Pay: <span class="final-price">₹0</span>
-</p>
-
-<p class="stock">🟢 In Stock</p>
-
-<a href="buyer-details.html">Buy Now</a>
-
-</div>
-
-<!-- Flipkart -->
-
-<div class="gift-card" data-discount="1">
-
-<img src="images/flipkart.png">
-
-<h3>Flipkart</h3>
-
-<p class="offer-badge"></p>
-
-<select>
-<option>Select Amount</option>
-<option>₹100</option>
-<option>₹250</option>
-<option>₹500</option>
-<option>₹1000</option>
-</select>
-
-<p class="price-info">
-    You Pay: <span class="final-price">₹0</span>
-</p>
-
-<p class="stock">🟢 In Stock</p>
-
-<a href="buyer-details.html">Buy Now</a>
-
-</div>
-
-<!-- Myntra -->
-
-<div class="gift-card" data-discount="1">
-
-<img src="images/myntra.png">
-
-<h3>Myntra</h3>
-
-<p class="offer-badge"></p>
-
-<select>
-<option>Select Amount</option>
-<option>₹250</option>
-<option>₹500</option>
-<option>₹1000</option>
-</select>
-
-<p class="price-info">
-    You Pay: <span class="final-price">₹0</span>
-</p>
-
-<p class="stock">🟢 In Stock</p>
-
-<a href="buyer-details.html">Buy Now</a>
-
-</div>
-
-<!-- AJIO -->
-
-<div class="gift-card" data-discount="4">
-
-<img src="images/ajio.png">
-
-<h3>AJIO</h3>
-
-<p class="offer-badge"></p>
-
-<select>
-<option>Select Amount</option>
-<option>₹250</option>
-<option>₹500</option>
-<option>₹1000</option>
-</select>
-
-<p class="price-info">
-    You Pay: <span class="final-price">₹0</span>
-</p>
-
-<p class="stock">🟢 In Stock</p>
-
-<a href="buyer-details.html">Buy Now</a>
-
-</div>
-
-<!-- Swiggy -->
-
-<div class="gift-card" data-discount="1">
-
-<img src="images/swiggy.png">
-
-<h3>Swiggy</h3>
-
-<p class="offer-badge"></p>
-
-<select>
-<option>Select Amount</option>
-<option>₹100</option>
-<option>₹250</option>
-<option>₹500</option>
-<option>₹1000</option>
-</select>
-
-<p class="price-info">
-    You Pay: <span class="final-price">₹0</span>
-</p>
-
-<p class="stock">🟢 In Stock</p>
-
-<a href="buyer-details.html">Buy Now</a>
-
-</div>
-
-<!-- Zomato -->
-
-<div class="gift-card" data-discount="1">
-
-<img src="images/zomato.png">
-
-<h3>Zomato</h3>
-
-<p class="offer-badge"></p>
-
-<select>
-<option>Select Amount</option>
-<option>₹100</option>
-<option>₹250</option>
-<option>₹500</option>
-<option>₹1000</option>
-</select>
-
-<p class="price-info">
-    You Pay: <span class="final-price">₹0</span>
-</p>
-
-<p class="stock">🟢 In Stock</p>
-
-<a href="buyer-details.html">Buy Now</a>
-
-</div>
-
-<!-- Domino's -->
-
-<div class="gift-card" data-discount="11">
-
-<img src="images/dominos.png">
-
-<h3>Domino's</h3>
-
-<p class="offer-badge"></p>
-
-<select>
-<option>Select Amount</option>
-<option>₹100</option>
-<option>₹250</option>
-<option>₹500</option>
-</select>
-
-<p class="price-info">
-    You Pay: <span class="final-price">₹0</span>
-</p>
-
-<p class="stock">🟢 In Stock</p>
-
-<a href="buyer-details.html">Buy Now</a>
-
-</div>
-
-<!-- BookMyShow -->
-
-<div class="gift-card" data-discount="1">
-
-<img src="images/bookmyshow.png">
-
-<h3>BookMyShow</h3>
-
-<p class="offer-badge"></p>
-
-<select>
-<option>Select Amount</option>
-<option>₹250</option>
-<option>₹500</option>
-<option>₹1000</option>
-</select>
-
-<p class="price-info">
-    You Pay: <span class="final-price">₹0</span>
-</p>
-
-<p class="stock">🟢 In Stock</p>
-
-<a href="buyer-details.html">Buy Now</a>
-
-</div>
-
-</div>
-
+<!-- Gift Cards Studio Section -->
+<section class="gift-cards-studio">
+    <div class="studio-header-box">
+        <h1 class="studio-title">🎁 Instant Digital Gift Cards</h1>
+        <p class="studio-desc">Unlock massive savings on top gaming, shopping, and food delivery gift cards instantly.</p>
+    </div>
+
+    <!-- Sorted Grid Container -->
+    <div class="gift-grid" id="giftCardsGridContainer">
+
+        <!-- Google Play (Forced 1st Position) -->
+        <div class="gift-card" data-discount="2" data-priority="1">
+            <span class="offer-badge">🔥 2% OFF</span>
+            <div class="card-img-box">
+                <img src="images/google-play.png" alt="Google Play">
+            </div>
+            <h3>Google Play</h3>
+            <select class="amount-selector">
+                <option value="0">Select Amount</option>
+                <option value="50">₹50</option>
+                <option value="100">₹100</option>
+                <option value="200">₹200</option>
+                <option value="500">₹500</option>
+                <option value="1000">₹1000</option>
+            </select>
+            <p class="price-info">You Pay: <span class="final-price">₹0</span></p>
+            <span class="save-info">You Save: ₹0</span>
+            <p class="stock">🟢 In Stock & Instant Delivery</p>
+            <a href="buyer-details.html" class="buy-btn">Buy Now 🔥</a>
+        </div>
+
+        <!-- Domino's (11% Discount) -->
+        <div class="gift-card" data-discount="11" data-priority="2">
+            <span class="offer-badge">🔥 11% OFF</span>
+            <div class="card-img-box">
+                <img src="images/dominos.png" alt="Domino's">
+            </div>
+            <h3>Domino's</h3>
+            <select class="amount-selector">
+                <option value="0">Select Amount</option>
+                <option value="100">₹100</option>
+                <option value="250">₹250</option>
+                <option value="500">₹500</option>
+            </select>
+            <p class="price-info">You Pay: <span class="final-price">₹0</span></p>
+            <span class="save-info">You Save: ₹0</span>
+            <p class="stock">🟢 In Stock & Instant Delivery</p>
+            <a href="buyer-details.html" class="buy-btn">Buy Now 🔥</a>
+        </div>
+
+        <!-- AJIO (4% Discount) -->
+        <div class="gift-card" data-discount="4" data-priority="3">
+            <span class="offer-badge">🔥 4% OFF</span>
+            <div class="card-img-box">
+                <img src="images/ajio.png" alt="AJIO">
+            </div>
+            <h3>AJIO</h3>
+            <select class="amount-selector">
+                <option value="0">Select Amount</option>
+                <option value="250">₹250</option>
+                <option value="500">₹500</option>
+                <option value="1000">₹1000</option>
+            </select>
+            <p class="price-info">You Pay: <span class="final-price">₹0</span></p>
+            <span class="save-info">You Save: ₹0</span>
+            <p class="stock">🟢 In Stock & Instant Delivery</p>
+            <a href="buyer-details.html" class="buy-btn">Buy Now 🔥</a>
+        </div>
+
+        <!-- Steam (2% Discount) -->
+        <div class="gift-card" data-discount="2" data-priority="4">
+            <span class="offer-badge">🔥 2% OFF</span>
+            <div class="card-img-box">
+                <img src="images/steam.png" alt="Steam">
+            </div>
+            <h3>Steam</h3>
+            <select class="amount-selector">
+                <option value="0">Select Amount</option>
+                <option value="250">₹250</option>
+                <option value="500">₹500</option>
+                <option value="1000">₹1000</option>
+            </select>
+            <p class="price-info">You Pay: <span class="final-price">₹0</span></p>
+            <span class="save-info">You Save: ₹0</span>
+            <p class="stock">🟢 In Stock & Instant Delivery</p>
+            <a href="buyer-details.html" class="buy-btn">Buy Now 🔥</a>
+        </div>
+
+        <!-- Amazon Pay (1% Discount) -->
+        <div class="gift-card" data-discount="1" data-priority="5">
+            <span class="offer-badge">🔥 1% OFF</span>
+            <div class="card-img-box">
+                <img src="images/amazon.png" alt="Amazon Pay">
+            </div>
+            <h3>Amazon Pay</h3>
+            <select class="amount-selector">
+                <option value="0">Select Amount</option>
+                <option value="100">₹100</option>
+                <option value="250">₹250</option>
+                <option value="500">₹500</option>
+                <option value="1000">₹1000</option>
+            </select>
+            <p class="price-info">You Pay: <span class="final-price">₹0</span></p>
+            <span class="save-info">You Save: ₹0</span>
+            <p class="stock">🟢 In Stock & Instant Delivery</p>
+            <a href="buyer-details.html" class="buy-btn">Buy Now 🔥</a>
+        </div>
+
+        <!-- Flipkart (1% Discount) -->
+        <div class="gift-card" data-discount="1" data-priority="6">
+            <span class="offer-badge">🔥 1% OFF</span>
+            <div class="card-img-box">
+                <img src="images/flipkart.png" alt="Flipkart">
+            </div>
+            <h3>Flipkart</h3>
+            <select class="amount-selector">
+                <option value="0">Select Amount</option>
+                <option value="100">₹100</option>
+                <option value="250">₹250</option>
+                <option value="500">₹500</option>
+                <option value="1000">₹1000</option>
+            </select>
+            <p class="price-info">You Pay: <span class="final-price">₹0</span></p>
+            <span class="save-info">You Save: ₹0</span>
+            <p class="stock">🟢 In Stock & Instant Delivery</p>
+            <a href="buyer-details.html" class="buy-btn">Buy Now 🔥</a>
+        </div>
+
+        <!-- Myntra (1% Discount) -->
+        <div class="gift-card" data-discount="1" data-priority="7">
+            <span class="offer-badge">🔥 1% OFF</span>
+            <div class="card-img-box">
+                <img src="images/myntra.png" alt="Myntra">
+            </div>
+            <h3>Myntra</h3>
+            <select class="amount-selector">
+                <option value="0">Select Amount</option>
+                <option value="250">₹250</option>
+                <option value="500">₹500</option>
+                <option value="1000">₹1000</option>
+            </select>
+            <p class="price-info">You Pay: <span class="final-price">₹0</span></p>
+            <span class="save-info">You Save: ₹0</span>
+            <p class="stock">🟢 In Stock & Instant Delivery</p>
+            <a href="buyer-details.html" class="buy-btn">Buy Now 🔥</a>
+        </div>
+
+        <!-- Swiggy (1% Discount) -->
+        <div class="gift-card" data-discount="1" data-priority="8">
+            <span class="offer-badge">🔥 1% OFF</span>
+            <div class="card-img-box">
+                <img src="images/swiggy.png" alt="Swiggy">
+            </div>
+            <h3>Swiggy</h3>
+            <select class="amount-selector">
+                <option value="0">Select Amount</option>
+                <option value="100">₹100</option>
+                <option value="250">₹250</option>
+                <option value="500">₹500</option>
+                <option value="1000">₹1000</option>
+            </select>
+            <p class="price-info">You Pay: <span class="final-price">₹0</span></p>
+            <span class="save-info">You Save: ₹0</span>
+            <p class="stock">🟢 In Stock & Instant Delivery</p>
+            <a href="buyer-details.html" class="buy-btn">Buy Now 🔥</a>
+        </div>
+
+        <!-- Zomato (1% Discount) -->
+        <div class="gift-card" data-discount="1" data-priority="9">
+            <span class="offer-badge">🔥 1% OFF</span>
+            <div class="card-img-box">
+                <img src="images/zomato.png" alt="Zomato">
+            </div>
+            <h3>Zomato</h3>
+            <select class="amount-selector">
+                <option value="0">Select Amount</option>
+                <option value="100">₹100</option>
+                <option value="250">₹250</option>
+                <option value="500">₹500</option>
+                <option value="1000">₹1000</option>
+            </select>
+            <p class="price-info">You Pay: <span class="final-price">₹0</span></p>
+            <span class="save-info">You Save: ₹0</span>
+            <p class="stock">🟢 In Stock & Instant Delivery</p>
+            <a href="buyer-details.html" class="buy-btn">Buy Now 🔥</a>
+        </div>
+
+        <!-- BookMyShow (1% Discount) -->
+        <div class="gift-card" data-discount="1" data-priority="10">
+            <span class="offer-badge">🔥 1% OFF</span>
+            <div class="card-img-box">
+                <img src="images/bookmyshow.png" alt="BookMyShow">
+            </div>
+            <h3>BookMyShow</h3>
+            <select class="amount-selector">
+                <option value="0">Select Amount</option>
+                <option value="250">₹250</option>
+                <option value="500">₹500</option>
+                <option value="1000">₹1000</option>
+            </select>
+            <p class="price-info">You Pay: <span class="final-price">₹0</span></p>
+            <span class="save-info">You Save: ₹0</span>
+            <p class="stock">🟢 In Stock & Instant Delivery</p>
+            <a href="buyer-details.html" class="buy-btn">Buy Now 🔥</a>
+        </div>
+
+    </div>
 </section>
 
-<footer class="footer">
-
-Crafted with ❤️ in Maharashtra, India 🇮🇳
-
-<br><br>
-
-© 2026 iVerxa Finds. All Rights Reserved.
-
+<!-- UPDATED CYBER-PUNK TRUST FOOTER (iVerxa Finds Gift Cards) -->
+<footer class="cyber-trust-footer">
+    <div class="footer-grid-container">
+        <div class="footer-widget">
+            <h4>iVerxa Finds Gift Cards</h4>
+            <p>Providing encrypted, instant-delivery digital gift cards and vouchers across India with verified merchant discounts.</p>
+            <div class="security-badge-box">
+                🛡️ 256-Bit SSL Encrypted
+            </div>
+        </div>
+        <div class="footer-widget">
+            <h4>Quick Shortcuts</h4>
+            <ul class="footer-nav-links">
+                <li><a href="index.html">Home Dashboard</a></li>
+                <li><a href="handpicked.html">Handpicked Deals</a></li>
+                <li><a href="giftfinder.html">Gift Selector</a></li>
+            </ul>
+        </div>
+        <div class="footer-widget">
+            <h4>Compliance & Help</h4>
+            <ul class="footer-nav-links">
+                <li><a href="contact.html">Customer Helpdesk</a></li>
+                <li><a href="about.html">About Platform</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer-terminal-bar">
+        <p>© 2026 iVerxa Finds. All Rights Reserved.</p>
+        <span class="scroll-top-trigger" onclick="executeScrollToTop()">↑ Top of Page</span>
+    </div>
 </footer>
 
+<!-- JavaScript Logic: Auto-Sort & Dynamic Pricing -->
 <script>
-document.querySelectorAll(".gift-card").forEach(card => {
+document.addEventListener("DOMContentLoaded", () => {
+    const gridContainer = document.getElementById("giftCardsGridContainer");
+    const cardsArray = Array.from(gridContainer.getElementsByClassName("gift-card"));
 
-    const discount = Number(card.dataset.discount);
+    // Sorting: Google Play first, then highest discount descending
+    cardsArray.sort((cardA, cardB) => {
+        const priorityA = Number(cardA.getAttribute("data-priority"));
+        const priorityB = Number(cardB.getAttribute("data-priority"));
 
-    // Badge
-    card.querySelector(".offer-badge").innerHTML =
-        "🔥 " + discount + "% OFF";
+        if (priorityA === 1) return -1;
+        if (priorityB === 1) return 1;
 
-    const select = card.querySelector("select");
-    const priceText = card.querySelector(".final-price");
-
-    select.addEventListener("change", function () {
-
-        let amount = this.value.replace("₹", "");
-
-        if (amount === "Select Amount") {
-            priceText.innerHTML = "₹0";
-            return;
-        }
-
-        amount = Number(amount);
-
-        const finalPrice = amount - (amount * discount / 100);
-
-        priceText.innerHTML = "₹" + finalPrice;
-
+        const discountA = Number(cardA.getAttribute("data-discount"));
+        const discountB = Number(cardB.getAttribute("data-discount"));
+        return discountB - discountA;
     });
 
+    cardsArray.forEach(card => gridContainer.appendChild(card));
+
+    // Interactive Pricing Engine
+    cardsArray.forEach(card => {
+        const discount = Number(card.getAttribute("data-discount"));
+        const selectBox = card.querySelector(".amount-selector");
+        const priceDisplay = card.querySelector(".final-price");
+        const saveDisplay = card.querySelector(".save-info");
+
+        selectBox.addEventListener("change", function () {
+            const rawVal = this.value;
+
+            if (rawVal === "0" || rawVal === "Select Amount") {
+                priceDisplay.innerHTML = "₹0";
+                saveDisplay.innerHTML = "You Save: ₹0";
+                return;
+            }
+
+            const amount = Number(rawVal);
+            const discountAmount = Math.round((amount * discount) / 100);
+            const finalPrice = amount - discountAmount;
+
+            priceDisplay.innerHTML = "₹" + finalPrice;
+            saveDisplay.innerHTML = "You Save: ₹" + discountAmount + " (" + discount + "% OFF)";
+        });
+    });
 });
+
+function executeScrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 </script>
 
 </body>

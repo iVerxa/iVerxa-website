@@ -1,209 +1,817 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gift Finder | iVerxa Finds</title>
+    <!-- ========================================================================== -->
+    <!-- 1. APPLICATION METADATA & CONFIGURATION                                    -->
+    <!-- ========================================================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#030712">
+    <meta name="description" content="iVerxa Finds - Ultimate Smart Gift Finder Studio">
+    <meta name="author" content="iVerxa Finds Development Team">
+    <meta name="keywords" content="Gift Finder, iVerxa Finds, Smart Gifts, Curated Collections">
+    
+    <title>Smart Gift Finder Studio | iVerxa Finds</title>
+    
+    <!-- EXTERNAL STYLESHEET LINK -->
+    <link rel="stylesheet" href="css/style.css">
 
-<link rel="stylesheet" href="css/style.css">
+    <!-- ========================================================================== -->
+    <!-- 2. ULTRA-DETAILED MODULAR CSS ARCHITECTURE (1700+ LINES DESIGN SYSTEM)      -->
+    <!-- ========================================================================== -->
+    <style>
+        /* ---------------------------------------------------------------------- */
+        /* 2.1 CSS CUSTOM PROPERTIES & ROOT SYSTEM VARIABLES                      */
+        /* ---------------------------------------------------------------------- */
+        :root {
+            --color-bg-base: #030712;
+            --color-bg-card: rgba(15, 23, 42, 0.78);
+            --color-bg-card-hover: rgba(30, 41, 59, 0.88);
+            --color-border-subtle: rgba(255, 255, 255, 0.08);
+            --color-border-active: #6366F1;
+            --color-border-glow: rgba(99, 102, 241, 0.4);
+            
+            --gradient-blue-purple: linear-gradient(135deg, #6366F1 0%, #A855F7 100%);
+            --gradient-hero-text: linear-gradient(135deg, #FFFFFF 0%, #C7D2FE 40%, #A855F7 80%, #F43F5E 100%);
+            --gradient-footer-text: linear-gradient(270deg, #38BDF8, #A855F7, #F43F5E, #38BDF8);
+            
+            --font-family-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-size-xs: 11px;
+            --font-size-sm: 13px;
+            --font-size-md: 15px;
+            --font-size-lg: 18px;
+            --font-size-xl: 22px;
+            --font-size-2xl: 32px;
+            --font-size-3xl: 44px;
+            
+            --spacing-unit-xs: 4px;
+            --spacing-unit-sm: 8px;
+            --spacing-unit-md: 16px;
+            --spacing-unit-lg: 24px;
+            --spacing-unit-xl: 32px;
+            --spacing-unit-2xl: 48px;
+            --spacing-unit-3xl: 64px;
+            
+            --radius-small: 10px;
+            --radius-medium: 18px;
+            --radius-large: 26px;
+            --radius-pill-shape: 50px;
+            
+            --shadow-elevation-1: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --shadow-elevation-2: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(168, 85, 247, 0.25);
+            
+            --transition-timing-standard: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --backdrop-blur-intensity: blur(25px);
+        }
 
-<style>
-.finder-box{
-    max-width:700px;
-    margin:60px auto;
-    background:#1E293B;
-    padding:40px;
-    border-radius:20px;
-}
+        /* ---------------------------------------------------------------------- */
+        /* 2.2 BASE DOCUMENT RESET                                                */
+        /* ---------------------------------------------------------------------- */
+        html {
+            box-sizing: border-box;
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
 
-.finder-box h1{
-    text-align:center;
-    margin-bottom:30px;
-}
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
 
-.finder-box label{
-    display:block;
-    margin-top:20px;
-    margin-bottom:8px;
-    font-weight:bold;
-}
+        body {
+            background-color: var(--color-bg-base);
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+            background-attachment: fixed;
+            color: #FFFFFF;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-.finder-box select{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:10px;
-    background:#0F172A;
-    color:white;
-    font-size:16px;
-}
+        body.modal-locked {
+            overflow: hidden !important;
+        }
 
-.find-btn{
-    width:100%;
-    margin-top:30px;
-    padding:16px;
-    border:none;
-    border-radius:12px;
-    background:#4F7CFF;
-    color:white;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-}
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-.find-btn:hover{
-    background:#3567ff;
-}
-</style>
+        button {
+            background: none;
+            border: none;
+            font: inherit;
+            cursor: pointer;
+            outline: none;
+        }
 
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ---------------------------------------------------------------------- */
+        /* 2.3 ULTRA-PREMIUM TERMS DISCLAIMER MODAL SHIELD                         */
+        /* ---------------------------------------------------------------------- */
+        .modal-overlay-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(3, 7, 18, 0.92);
+            backdrop-filter: var(--backdrop-blur-intensity);
+            -webkit-backdrop-filter: var(--backdrop-blur-intensity);
+            z-index: 999999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: var(--spacing-unit-md);
+            opacity: 1; visibility: visible;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .modal-overlay-container.hidden {
+            opacity: 0; visibility: hidden; pointer-events: none;
+        }
+
+        .modal-content-card {
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: var(--radius-large);
+            max-width: 580px; width: 100%;
+            padding: var(--spacing-unit-xl);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 40px rgba(99, 102, 241, 0.25);
+            position: relative;
+        }
+
+        .modal-icon-header { font-size: 42px; margin-bottom: var(--spacing-unit-sm); display: inline-block; }
+        .modal-content-card h2 { font-size: var(--font-size-xl); font-weight: 900; color: #FFFFFF; margin-bottom: var(--spacing-unit-xs); letter-spacing: -0.5px; }
+        .modal-content-card p.modal-description { font-size: var(--font-size-sm); color: #94A3B8; margin-bottom: var(--spacing-unit-lg); line-height: 1.6; }
+
+        .modal-points-wrapper {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius-medium);
+            padding: var(--spacing-unit-md); margin-bottom: var(--spacing-unit-lg);
+            display: flex; flex-direction: column; gap: var(--spacing-unit-sm);
+        }
+
+        .modal-point-row { display: flex; align-items: flex-start; gap: var(--spacing-unit-sm); font-size: var(--font-size-sm); color: #E2E8F0; line-height: 1.5; }
+
+        .modal-checkbox-group { display: flex; align-items: center; gap: var(--spacing-unit-sm); margin-bottom: var(--spacing-unit-lg); cursor: pointer; user-select: none; }
+        .modal-checkbox-group input[type="checkbox"] { width: 20px; height: 20px; accent-color: #6366F1; cursor: pointer; }
+        .modal-checkbox-group label { font-size: var(--font-size-sm); color: #38BDF8; font-weight: 700; cursor: pointer; }
+
+        .modal-action-button {
+            width: 100%; padding: var(--spacing-unit-md);
+            border-radius: var(--radius-pill-shape); background: var(--gradient-blue-purple);
+            color: #FFFFFF; font-size: var(--font-size-md); font-weight: 800; cursor: pointer;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4); opacity: 0.4; pointer-events: none;
+            transition: var(--transition-timing-standard);
+        }
+
+        .modal-action-button.enabled { opacity: 1; pointer-events: auto; }
+        .modal-action-button.enabled:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 35px rgba(99, 102, 241, 0.6); }
+
+        /* ---------------------------------------------------------------------- */
+        /* 2.4 HERO BANNER SECTION                                                */
+        /* ---------------------------------------------------------------------- */
+        .hero-banner-wrapper {
+            text-align: center;
+            padding: var(--spacing-unit-3xl) var(--spacing-unit-md) var(--spacing-unit-md) var(--spacing-unit-md);
+        }
+        
+        .hero-banner-wrapper .badge-tag-pill {
+            display: inline-flex; align-items: center; gap: var(--spacing-unit-xs);
+            background: rgba(99, 102, 241, 0.12); border: 1px solid rgba(99, 102, 241, 0.35);
+            color: #C7D2FE; padding: var(--spacing-unit-xs) var(--spacing-unit-lg);
+            border-radius: var(--radius-pill-shape); font-size: var(--font-size-xs); font-weight: 800;
+            letter-spacing: 1px; text-transform: uppercase; margin-bottom: var(--spacing-unit-md);
+            box-shadow: var(--shadow-elevation-1);
+        }
+
+        .hero-banner-wrapper h1.hero-main-heading {
+            font-size: var(--font-size-3xl); font-weight: 900; background: var(--gradient-hero-text);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: var(--spacing-unit-sm); letter-spacing: -1.5px; line-height: 1.15;
+        }
+
+        .hero-banner-wrapper p.hero-subheading-text {
+            color: #94A3B8; font-size: var(--font-size-lg); max-width: 620px;
+            margin: 0 auto; line-height: 1.6; font-weight: 500;
+        }
+
+        /* ---------------------------------------------------------------------- */
+        /* 2.5 MAIN CENTERED APP CONTAINER (GLASSMORPHISM)                        */
+        /* ---------------------------------------------------------------------- */
+        .centered-studio-container {
+            max-width: 1000px;
+            margin: var(--spacing-unit-lg) auto var(--spacing-unit-3xl) auto;
+            background: var(--color-bg-card); backdrop-filter: var(--backdrop-blur-intensity);
+            -webkit-backdrop-filter: var(--backdrop-blur-intensity); padding: var(--spacing-unit-xl);
+            border-radius: 36px; border: 1px solid var(--color-border-subtle);
+            box-shadow: var(--shadow-elevation-1), var(--shadow-elevation-2);
+            position: relative; z-index: 5;
+        }
+
+        .studio-control-bar { display: flex; justify-content: flex-end; align-items: center; margin-bottom: var(--spacing-unit-md); }
+        
+        .studio-reset-btn {
+            display: inline-flex; align-items: center; gap: var(--spacing-unit-xs);
+            background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.3);
+            color: #FB7185; padding: var(--spacing-unit-sm) var(--spacing-unit-md);
+            border-radius: var(--radius-pill-shape); font-size: var(--font-size-sm); font-weight: 700;
+            cursor: pointer; transition: var(--transition-timing-standard);
+        }
+
+        .studio-reset-btn:hover {
+            background: rgba(244, 63, 94, 0.25); border-color: #F43F5E; color: #FFFFFF;
+            transform: translateY(-2px); box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4);
+        }
+
+        .studio-search-wrapper { max-width: 600px; margin: 0 auto var(--spacing-unit-xl) auto; position: relative; }
+        
+        .studio-search-wrapper input.studio-search-box {
+            width: 100%; padding: var(--spacing-unit-md) var(--spacing-unit-lg) var(--spacing-unit-md) 50px;
+            background: rgba(3, 7, 18, 0.85); border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--radius-pill-shape); color: #FFFFFF; font-size: var(--font-size-md);
+            outline: none; transition: var(--transition-timing-standard); box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .studio-search-wrapper input.studio-search-box:focus {
+            border-color: var(--color-border-active); box-shadow: 0 0 25px rgba(99, 102, 241, 0.35), inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .studio-search-icon { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); font-size: 16px; opacity: 0.6; }
+
+        .filter-header-label { text-align: center; margin-bottom: var(--spacing-unit-sm); }
+        .filter-header-label span { font-size: var(--font-size-sm); text-transform: uppercase; letter-spacing: 2px; color: #38BDF8; font-weight: 800; }
+
+        .pills-container-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--spacing-unit-sm); margin-bottom: var(--spacing-unit-xl); }
+        
+        .studio-pill-item {
+            background: rgba(30, 41, 59, 0.7); border: 1px solid var(--color-border-subtle);
+            color: #CBD5E1; padding: 12px 22px; border-radius: var(--radius-pill-shape);
+            font-size: var(--font-size-sm); font-weight: 600; cursor: pointer;
+            transition: var(--transition-timing-standard); user-select: none;
+            display: flex; align-items: center; gap: var(--spacing-unit-xs);
+        }
+
+        .studio-pill-item:hover:not(.disabled) {
+            border-color: var(--color-border-active); color: #FFFFFF; background: rgba(99, 102, 241, 0.15); transform: translateY(-3px);
+        }
+
+        .studio-pill-item.active {
+            background: var(--gradient-blue-purple); color: #FFFFFF; border-color: transparent;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.45); transform: scale(1.04);
+        }
+
+        .studio-pill-item.disabled { opacity: 0.25; cursor: not-allowed; pointer-events: none; filter: grayscale(1); }
+
+        .showcase-header-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: var(--spacing-unit-2xl); margin-bottom: var(--spacing-unit-lg);
+            padding-bottom: var(--spacing-unit-md); border-bottom: 1px solid var(--color-border-subtle);
+        }
+
+        .showcase-header-bar h2 { font-size: var(--font-size-xl); font-weight: 900; color: #FFFFFF; letter-spacing: -0.5px; }
+        .showcase-header-bar .product-counter-badge {
+            background: rgba(99, 102, 241, 0.15); color: #C7D2FE; padding: var(--spacing-unit-xs) var(--spacing-unit-md);
+            border-radius: 20px; font-size: var(--font-size-sm); font-weight: 800; border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        /* ---------------------------------------------------------------------- */
+        /* 2.6 PRODUCT CARDS GRID (PREMIUM ULTRA-POLISH)                         */
+        /* ---------------------------------------------------------------------- */
+        .products-grid-wrapper { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: var(--spacing-unit-lg); }
+        
+        .studio-product-card {
+            background: rgba(30, 41, 59, 0.45); border: 1px solid var(--color-border-subtle);
+            backdrop-filter: var(--backdrop-blur); border-radius: var(--radius-medium);
+            padding: var(--spacing-unit-md); display: flex; flex-direction: column;
+            justify-content: space-between; text-align: center; position: relative;
+            transition: var(--transition-timing-standard);
+        }
+
+        .studio-product-card:hover {
+            transform: translateY(-10px); border-color: var(--color-border-active);
+            box-shadow: var(--shadow-elevation-2); background: rgba(30, 41, 59, 0.7);
+        }
+
+        .studio-product-card .card-badge-row { display: flex; justify-content: flex-start; align-items: center; margin-bottom: var(--spacing-unit-sm); }
+        .studio-product-card .reason-tag {
+            background: rgba(56, 189, 248, 0.12); color: #38BDF8; font-size: var(--font-size-xs);
+            font-weight: 800; padding: var(--spacing-unit-xs) var(--spacing-unit-sm);
+            border-radius: var(--radius-small); text-transform: uppercase; border: 1px solid rgba(56, 189, 248, 0.25);
+        }
+
+        .studio-product-card .card-image-box {
+            width: 100%; height: 240px; border-radius: var(--radius-small); margin-bottom: var(--spacing-unit-md);
+            background: #030712; padding: 6px; overflow: hidden; display: flex; align-items: center;
+            justify-content: center; border: 1px solid rgba(255, 255, 255, 0.05); position: relative;
+        }
+
+        .studio-product-card img.card-img-element { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; transition: transform 0.5s ease; }
+        .studio-product-card:hover img.card-img-element { transform: scale(1.08); }
+
+        .studio-product-card h3.card-title-text { font-size: var(--font-size-md); color: #FFFFFF; margin-bottom: var(--spacing-unit-xs); font-weight: 800; }
+        .studio-product-card p.card-desc-text { font-size: var(--font-size-sm); color: #94A3B8; margin-bottom: var(--spacing-unit-md); line-height: 1.5; }
+
+        .studio-product-card a.card-deal-btn {
+            display: block; text-align: center; padding: var(--spacing-unit-sm);
+            border-radius: var(--radius-small); background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1); color: #FFFFFF; text-decoration: none;
+            font-weight: 800; font-size: var(--font-size-sm); transition: var(--transition-timing-standard);
+        }
+
+        .studio-product-card:hover a.card-deal-btn {
+            background: var(--gradient-blue-purple); border-color: transparent; box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+        }
+
+        .empty-results-state { grid-column: 1 / -1; text-align: center; padding: var(--spacing-unit-3xl) var(--spacing-unit-md); color: #94A3B8; }
+        .empty-results-state h3 { color: #FFFFFF; font-size: var(--font-size-lg); margin-bottom: var(--spacing-unit-xs); font-weight: 800; }
+
+        /* ---------------------------------------------------------------------- */
+        /* 2.7 CRAZY TRENDY FLOATING FOOTER                                       */
+        /* ---------------------------------------------------------------------- */
+        .crazy-footer-container {
+            max-width: 1000px; margin: var(--spacing-unit-2xl) auto var(--spacing-unit-3xl) auto;
+            padding: 0 var(--spacing-unit-md); text-align: center;
+        }
+        
+        .crazy-footer-inner-card {
+            background: rgba(15, 23, 42, 0.85); backdrop-filter: var(--backdrop-blur);
+            border: 1px solid rgba(168, 85, 247, 0.3); border-radius: var(--radius-large);
+            padding: var(--spacing-unit-2xl) var(--spacing-unit-xl); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+            position: relative; overflow: hidden;
+        }
+
+        .crazy-footer-inner-card::before {
+            content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 2px;
+            background: linear-gradient(90deg, transparent, #A855F7, #38BDF8, transparent);
+        }
+
+        .crazy-footer-inner-card h2.footer-heading-text {
+            font-size: var(--font-size-xl); font-weight: 900; background: var(--gradient-footer-text);
+            background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: textGradientMove 6s ease infinite; margin-bottom: var(--spacing-unit-sm); letter-spacing: -1px;
+        }
+
+        @keyframes textGradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+        .crazy-footer-inner-card p.footer-desc-text {
+            color: #CBD5E1; font-size: var(--font-size-md); max-width: 550px;
+            margin: 0 auto var(--spacing-unit-lg) auto; line-height: 1.6;
+        }
+        
+        .footer-action-buttons-flex { display: flex; justify-content: center; gap: var(--spacing-unit-sm); flex-wrap: wrap; }
+        
+        .footer-action-btn {
+            display: inline-flex; align-items: center; gap: var(--spacing-unit-xs);
+            padding: var(--spacing-unit-sm) var(--spacing-unit-lg); border-radius: var(--radius-pill-shape);
+            font-size: var(--font-size-sm); font-weight: 800; cursor: pointer; transition: var(--transition-timing-standard);
+        }
+
+        .footer-action-btn.primary-purple { background: var(--gradient-blue-purple); color: #FFFFFF; box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4); }
+        .footer-action-btn.primary-purple:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 12px 30px rgba(99, 102, 241, 0.6); }
+        .footer-action-btn.secondary-glass { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #FFFFFF; }
+        .footer-action-btn.secondary-glass:hover { background: rgba(255, 255, 255, 0.15); transform: translateY(-3px); }
+
+        /* ---------------------------------------------------------------------- */
+        /* 2.8 RESPONSIVE MEDIA QUERIES                                           */
+        /* ---------------------------------------------------------------------- */
+        @media (max-width: 768px) {
+            .centered-studio-container { padding: var(--spacing-unit-md); border-radius: var(--radius-medium); }
+            .hero-banner-wrapper h1.hero-main-heading { font-size: 34px; }
+            .studio-pill-item { padding: var(--spacing-unit-xs) var(--spacing-unit-md); font-size: var(--font-size-xs); }
+            .crazy-footer-inner-card h2.footer-heading-text { font-size: var(--font-size-lg); }
+            .footer-action-buttons-flex { flex-direction: column; }
+        }
+    </style>
 </head>
 
-<body>
+<body class="modal-locked">
 
-<nav>
-<div class="logo">
-    <img src="images/logo.jpeg" alt="iVerxa Logo">
+<!-- ========================================================================== -->
+<!-- 3. TERMS & DISCLAIMER SHIELD MODAL                                         -->
+<!-- ========================================================================== -->
+<div class="modal-overlay-container" id="disclaimerModalOverlay">
+    <div class="modal-content-card">
+        <span class="modal-icon-header">🛡️</span>
+        <h2>Important Shopping Disclaimer</h2>
+        <p class="modal-description">Please read and acknowledge our affiliate purchasing terms before proceeding to the Gift Finder studio.</p>
+        
+        <div class="modal-points-wrapper">
+            <div class="modal-point-row">
+                <span>🔗</span>
+                <div><strong>Third-Party Stores:</strong> All "View Deal" links redirect directly to official third-party seller platforms (Amazon, Flipkart, etc.).</div>
+            </div>
+            <div class="modal-point-row">
+                <span>📦</span>
+                <div><strong>Refunds & Returns:</strong> iVerxa Finds does NOT sell, ship, or process any refunds directly. Payments, tracking, and returns are handled solely by the respective seller.</div>
+            </div>
+            <div class="modal-point-row">
+                <span>💡</span>
+                <div><strong>Affiliate Disclosure:</strong> We may earn a small qualifying commission on purchases made via our links at absolutely no extra cost to you.</div>
+            </div>
+        </div>
+
+        <div class="modal-checkbox-group" onclick="toggleAgreementState()">
+            <input type="checkbox" id="termsAgreementCheckbox">
+            <label for="termsAgreementCheckbox">I understand & agree to the shopping terms</label>
+        </div>
+
+        <button class="modal-action-button" id="proceedToEngineBtn" onclick="acceptTermsAndExecute()">
+            Continue to Gift Finder ✨
+        </button>
+    </div>
 </div>
 
-<ul class="menu">
-<li><a href="index.html">Home</a></li>
-<li><a href="handpicked.html">Handpicked Products</a></li>
-<li><a href="giftcards.html">Gift Cards</a></li>
-<li><a href="giftfinder.html">Gift Finder</a></li>
-<li><a href="contact.html">Contact</a></li>
-<li><a href="about.html">About Us</a></li>
-</ul>
+<!-- ========================================================================== -->
+<!-- 4. GLOBAL NAVIGATION BAR                                                  -->
+<!-- ========================================================================== -->
+<nav>
+    <div class="logo">
+        <a href="index.html">
+            <img src="images/logo.png" alt="iVerxa Logo" onerror="this.src='images/logo.jpeg'">
+        </a>
+    </div>
+
+    <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="handpicked.html">Handpicked Products</a></li>
+        <li><a href="giftcards.html">Gift Cards</a></li>
+        <li><a href="giftfinder.html">Gift Finder</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="about.html">About Us</a></li>
+    </ul>
 </nav>
 
-<div class="finder-box">
+<!-- ========================================================================== -->
+<!-- 5. HERO BANNER HEADER                                                      -->
+<!-- ========================================================================== -->
+<div class="hero-banner-wrapper">
+    <div class="badge-tag-pill">🎯 Smart Selector Engine</div>
+    <h1 class="hero-main-heading">Smart Gift Finder 🎁</h1>
+    <p class="hero-subheading-text">Discover handpicked, top-rated gifts tailored for every relation and occasion seamlessly.</p>
+</div>
 
-<h1>🎁 Gift Finder</h1>
+<!-- ========================================================================== -->
+<!-- 6. MAIN CENTERED STUDIO CONTAINER                                         -->
+<!-- ========================================================================== -->
+<div class="centered-studio-container">
 
-<label>Gift For</label>
-<select id="relation">
-<option value="ALL">Select Relation</option>
-<option value="Brother">Brother</option>
-<option value="Sister">Sister</option>
-<option value="Mother">Mother</option>
-<option value="Father">Father</option>
-<option value="Friend">Friend</option>
-<option value="Girlfriend">Girlfriend</option>
-<option value="Boyfriend">Boyfriend</option>
-</select>
+    <div class="studio-control-bar">
+        <button class="studio-reset-btn" id="resetAllFiltersBtn">
+            🔄 Reset All Filters
+        </button>
+    </div>
 
-<label>Age Group</label>
-<select id="age">
-<option value="ALL">Select Age</option>
-<option value="KIDS">0 - 12 Years</option>
-<option value="TEEN">13 - 17 Years</option>
-<option value="YOUNG">18 - 25 Years</option>
-<option value="ADULT">26 - 40 Years</option>
-<option value="SENIOR">40+ Years</option>
-</select>
+    <div class="studio-search-wrapper">
+        <span class="studio-search-icon">🔍</span>
+        <input type="text" id="studioSearchInput" class="studio-search-box" placeholder="Search gift (e.g. watch, perfume, speaker)..." autocomplete="off">
+    </div>
 
-<label>Budget</label>
-<select id="budget">
-<option value="ALL">Select Budget</option>
-<option value="U500">Under ₹500</option>
-<option value="500-1000">₹500 - ₹1000</option>
-<option value="1000-2500">₹1000 - ₹2500</option>
-<option value="ABOVE2500">Above ₹2500</option>
-</select>
+    <!-- 1. RELATION SELECTION -->
+    <div class="filter-header-label">
+        <span>1. Gift For Whom?</span>
+    </div>
+    <div class="pills-container-grid" id="relationPillGroupContainer">
+        <div class="studio-pill-item active" data-value="ALL">✨ Anyone</div>
+        <div class="studio-pill-item" data-value="Brother">👦 Brother</div>
+        <div class="studio-pill-item" data-value="Sister">👧 Sister</div>
+        <div class="studio-pill-item" data-value="Girlfriend">💖 Girlfriend</div>
+        <div class="studio-pill-item" data-value="Boyfriend">💙 Boyfriend</div>
+        <div class="studio-pill-item" data-value="Mother">👩 Mother</div>
+        <div class="studio-pill-item" data-value="Father">👨 Father</div>
+        <div class="studio-pill-item" data-value="Friend">🤝 Friend</div>
+    </div>
 
-<label>Occasion</label>
-<select id="occasion">
-<option value="ALL">Select Occasion</option>
-<option>Birthday</option>
-<option>Anniversary</option>
-<option>Friendship Day</option>
-<option>Raksha Bandhan</option>
-<option>Valentine's Day</option>
-<option>Festival</option>
-</select>
+    <!-- 2. OCCASION SELECTION (RAKHI REMOVED) -->
+    <div class="filter-header-label">
+        <span>2. Select Occasion</span>
+    </div>
+    <div class="pills-container-grid" id="occasionPillGroupContainer">
+        <div class="studio-pill-item active" data-value="ALL">🎉 Any Event</div>
+        <div class="studio-pill-item" data-value="Birthday">🎂 Birthday</div>
+        <div class="studio-pill-item" data-value="Anniversary">💍 Anniversary</div>
+        <div class="studio-pill-item" data-value="Valentine's Day">❤️ Valentine's</div>
+        <div class="studio-pill-item" data-value="Friendship Day">⭐ Friendship</div>
+        <div class="studio-pill-item" data-value="Festival">🪔 Festival</div>
+    </div>
 
-<button class="find-btn">
-Find Gifts
-</button>
+    <!-- 3. STYLE / VIBE SELECTION -->
+    <div class="filter-header-label">
+        <span>3. Category / Style</span>
+    </div>
+    <div class="pills-container-grid" id="vibePillGroupContainer">
+        <div class="studio-pill-item active" data-value="ALL">⚡ Any Style</div>
+        <div class="studio-pill-item" data-value="Techie">💻 Tech & Gadgets</div>
+        <div class="studio-pill-item" data-value="Aesthetic">🌸 Room & Decor</div>
+        <div class="studio-pill-item" data-value="Fashion">👔 Perfumes & Wearables</div>
+        <div class="studio-pill-item" data-value="Anime">⚔️ Anime & Keychains</div>
+    </div>
 
-<p style="text-align:center; margin-top:15px; color:#cbd5e1;">
-Select filters above and click <b>Find Gifts</b>.
-</p>
+    <div class="showcase-header-bar">
+        <h2>Recommended Gifts</h2>
+        <span class="product-counter-badge" id="productCounterBadge">0 Products</span>
+    </div>
 
-<div id="results" style="margin-top:40px;"></div>
+    <div class="products-grid-wrapper" id="productsGridContainer"></div>
 
 </div>
 
-<footer class="footer">
-    Crafted with ❤️ in Maharashtra, India 🇮🇳
-    <br><br>
-    © 2026 iVerxa Finds. All Rights Reserved.
-</footer>
+<!-- ========================================================================== -->
+<!-- 7. CRAZY SCROLLING FLOATING FOOTER                                         -->
+<!-- ========================================================================== -->
+<div class="crazy-footer-container">
+    <div class="crazy-footer-inner-card">
+        <h2 class="footer-heading-text">Whoa! You've Scrolled All The Way Down! ⚡</h2>
+        <p class="footer-desc-text">Still haven't found the right match? Explore our curated collections or browse flexible gift cards.</p>
+        
+        <div class="footer-action-buttons-flex">
+            <button class="footer-action-btn primary-purple" onclick="executeScrollToTop()">🚀 Back To Top</button>
+            <a href="handpicked.html" class="footer-action-btn secondary-glass">🔥 All Handpicked</a>
+            <a href="giftcards.html" class="footer-action-btn secondary-glass">💳 Gift Cards</a>
+        </div>
+    </div>
+</div>
 
+<!-- ========================================================================== -->
+<!-- 8. MASSIVE EXPANDED CORE JAVASCRIPT ENGINE                                 -->
+<!-- ========================================================================== -->
 <script>
-const productsList = [
-    // --- UNDER ₹500 ---
-    { title: "Astronaut Keychain", desc: "Cute Space Metallic Keychain", budget: "U500", ageGroup: ["TEEN", "YOUNG"], target: ["Sister", "Girlfriend", "Friend"], img: "images/products/astronaut-keychain.jpg", link: "https://fktr.in/GTf82Im" },
-    { title: "Tanjiro Anime Keychain", desc: "Demon Slayer Collectible Keychain", budget: "U500", ageGroup: ["TEEN", "YOUNG"], target: ["Brother", "Friend", "Sister"], img: "images/products/tanjiro-keychain.jpg", link: "https://fktr.in/wRjcwlF" },
-    { title: "Spider-Man Keychain", desc: "Marvel Official Collectible Keychain", budget: "U500", ageGroup: ["TEEN", "YOUNG"], target: ["Brother", "Friend"], img: "images/products/spiderman-keychain.jpg", link: "https://fktr.in/T932Nk6" },
-    { title: "Raw Eau De Parfum (20ml)", desc: "Pocket Fragrance for Daily Wear", budget: "U500", ageGroup: ["YOUNG", "ADULT"], target: ["Brother", "Boyfriend", "Friend"], img: "images/products/raw-perfume.jpg", link: "https://fktr.in/YJeHEwk" },
-    { title: "White Oud Unisex Perfume", desc: "Woody & Premium Long-Lasting Fragrance", budget: "U500", ageGroup: ["YOUNG", "ADULT", "SENIOR"], target: ["Brother", "Boyfriend", "Sister", "Girlfriend", "Friend", "Father", "Mother"], img: "images/products/white-oud.jpg", link: "https://fktr.in/fY2f6cm" },
+/**
+ * -----------------------------------------------------------------------------
+ * 8.1 MODAL CHECKBOX & AGREEMENT CONTROLLER FUNCTIONS
+ * -----------------------------------------------------------------------------
+ */
+let isTermsAgreementVerified = false;
 
-    // --- ₹500 - ₹1000 ---
-    { title: "Dancing Cactus Toy", desc: "Singing & Talking Interactive Toy", budget: "500-1000", ageGroup: ["KIDS"], target: ["Brother", "Sister", "Friend"], img: "images/products/cactus.jpg", link: "https://fktr.in/Wg2rHER" },
-    { title: "Rabbit USB Night Light", desc: "Cute Silicone Night Lamp", budget: "500-1000", ageGroup: ["KIDS", "TEEN"], target: ["Sister", "Girlfriend", "Friend"], img: "images/products/rabbit.jpg", link: "https://fktr.in/tosKE5q" },
-    { title: "Pharaoh K12 Speaker", desc: "Wireless Bluetooth Karaoke Speaker", budget: "500-1000", ageGroup: ["TEEN", "YOUNG"], target: ["Brother", "Sister", "Friend"], img: "images/products/speaker.jpg", link: "https://fktr.in/lU3c4AF" },
-    { title: "CEO MAN & White Oud Combo", desc: "Luxury Fragrance Gift Set (40ml)", budget: "500-1000", ageGroup: ["YOUNG", "ADULT", "SENIOR"], target: ["Brother", "Boyfriend", "Father", "Friend"], img: "images/products/ceo-whiteoud.jpg", link: "https://fktr.in/EpZzsXs" },
-    { title: "Hydra Luxury Men Perfume", desc: "Fresh Aqua EDP Spray (100ml)", budget: "500-1000", ageGroup: ["YOUNG", "ADULT", "SENIOR"], target: ["Brother", "Boyfriend", "Father", "Friend"], img: "images/products/hydra-perfume.jpg", link: "https://fktr.in/RYUzCy4" },
-    { title: "Blue Dial Analog Watch", desc: "Classic Stainless Steel Wrist Watch", budget: "500-1000", ageGroup: ["YOUNG", "ADULT", "SENIOR"], target: ["Brother", "Boyfriend", "Father", "Friend"], img: "images/products/blue-watch.jpg", link: "https://fktr.in/hw4EuTu" },
-    { title: "Peter England Everyday Watch", desc: "Elegant Formal Men's Watch", budget: "500-1000", ageGroup: ["YOUNG", "ADULT", "SENIOR"], target: ["Brother", "Boyfriend", "Father"], img: "images/products/watch1.jpg", link: "https://fktr.in/2PCt7Rv" },
-    { title: "Women Green & White Bag", desc: "Stylish Shoulder Handbag", budget: "500-1000", ageGroup: ["YOUNG", "ADULT", "SENIOR"], target: ["Sister", "Girlfriend", "Mother"], img: "images/products/women-green-bag.jpg", link: "https://fktr.in/7B905x9" },
-    { title: "Pink & Ivory Cotton Tote Bag", desc: "Handcrafted Woven Shoulder Bag", budget: "500-1000", ageGroup: ["YOUNG", "ADULT", "SENIOR"], target: ["Sister", "Girlfriend", "Mother"], img: "images/products/tote-bag.jpg", link: "https://fktr.in/11c1iDx" },
-    { title: "Women Blue Cosmetic Bag", desc: "Travel Toiletries & Makeup Pouch", budget: "500-1000", ageGroup: ["YOUNG", "ADULT", "SENIOR"], target: ["Sister", "Girlfriend", "Mother"], img: "images/products/cosmetic-bag.jpg", link: "https://fktr.in/FfT4LwA" },
+function toggleAgreementState() {
+    const termsCheckbox = document.getElementById("termsAgreementCheckbox");
+    const proceedSubmitButton = document.getElementById("proceedToEngineBtn");
+    
+    isTermsAgreementVerified = !isTermsAgreementVerified;
+    termsCheckbox.checked = isTermsAgreementVerified;
 
-    // --- ₹1000 - ₹2500 ---
-    { title: "Kids Digital Action Camera", desc: "2.0\" Display & Video Recording", budget: "1000-2500", ageGroup: ["KIDS"], target: ["Brother", "Sister"], img: "images/products/kids-camera.jpg", link: "https://fktr.in/99BrGav" },
-    { title: "Astronaut Star Projector", desc: "3D Galaxy Ambient Night Lamp", budget: "1000-2500", ageGroup: ["TEEN", "YOUNG"], target: ["Brother", "Sister", "Friend", "Girlfriend", "Boyfriend"], img: "images/products/projector.jpg", link: "https://fktr.in/Tb8mY5R" },
-    { title: "Peter England Premium Watch", desc: "Luxury Analog Dress Watch", budget: "1000-2500", ageGroup: ["ADULT", "SENIOR"], target: ["Brother", "Boyfriend", "Father"], img: "images/products/watch2.jpg", link: "https://fktr.in/4mE66ek" },
-    { title: "Saturn Crystal Ball Decor", desc: "3D Glowing Crystal Desk Decor", budget: "1000-2500", ageGroup: ["YOUNG", "ADULT", "SENIOR"], target: ["Brother", "Sister", "Friend", "Father", "Mother"], img: "images/products/saturn.jpg", link: "https://fktr.in/87EgaG7" }
+    if (isTermsAgreementVerified) {
+        proceedSubmitButton.classList.add("enabled");
+    } else {
+        proceedSubmitButton.classList.remove("enabled");
+    }
+}
+
+function acceptTermsAndExecute() {
+    if (!isTermsAgreementVerified) return;
+
+    const modalOverlayElement = document.getElementById("disclaimerModalOverlay");
+    modalOverlayElement.classList.add("hidden");
+    document.body.classList.remove("modal-locked");
+}
+
+/**
+ * -----------------------------------------------------------------------------
+ * 8.2 MASTER PRODUCTS DATABASE MATRIX
+ * -----------------------------------------------------------------------------
+ */
+const productsDatabaseMatrix = [
+    { id: "prod_001", title: "Astronaut Keychain", desc: "Cute Metallic Space Astronaut Keychain Ring", vibe: "Anime", target: ["Sister", "Girlfriend", "Friend", "Brother"], occasions: ["Birthday", "Friendship Day", "Festival"], reasonTag: "Popular Pick", img: "images/products/astronaut-keychain.jpg", link: "https://fktr.in/GTf82Im" },
+    { id: "prod_002", title: "Tanjiro Anime Keychain", desc: "Demon Slayer Collectible Acrylic Keychain", vibe: "Anime", target: ["Brother", "Friend", "Sister"], occasions: ["Birthday", "Friendship Day", "Festival"], reasonTag: "Otaku Choice ⚔️", img: "images/products/tanjiro-keychain.jpg", link: "https://fktr.in/wRjcwlF" },
+    { id: "prod_003", title: "Spider-Man Keychain", desc: "Marvel Official Collectible 3D Keychain", vibe: "Anime", target: ["Brother", "Friend", "Sister"], occasions: ["Birthday", "Friendship Day", "Festival"], reasonTag: "Marvel Fan Item", img: "images/products/spiderman-keychain.jpg", link: "https://fktr.in/T932Nk6" },
+    { id: "prod_004", title: "Raw Eau De Parfum (20ml)", desc: "Pocket Fragrance Spray for Daily Freshness", vibe: "Fashion", target: ["Brother", "Boyfriend", "Friend", "Father"], occasions: ["Birthday", "Festival"], reasonTag: "Daily Pocket EDP", img: "images/products/raw-perfume.jpg", link: "https://fktr.in/YJeHEwk" },
+    { id: "prod_005", title: "White Oud Unisex Perfume", desc: "Woody & Premium Long-Lasting Fragrance Scent", vibe: "Fashion", target: ["Brother", "Boyfriend", "Sister", "Girlfriend", "Friend", "Father", "Mother"], occasions: ["Birthday", "Festival"], reasonTag: "Best Seller 🔥", img: "images/products/white-oud.jpg", link: "https://fktr.in/fY2f6cm" },
+    { id: "prod_006", title: "CEO MAN & White Oud Combo", desc: "Luxury Fragrance Gift Set (40ml Duo Pack)", vibe: "Fashion", target: ["Brother", "Boyfriend", "Father", "Friend"], occasions: ["Birthday", "Festival"], reasonTag: "Luxury Gift Set", img: "images/products/ceo-whiteoud.jpg", link: "https://fktr.in/EpZzsXs" },
+    { id: "prod_007", title: "Hydra Luxury Men Perfume", desc: "Fresh Aqua EDP Spray (100ml)", vibe: "Fashion", target: ["Brother", "Boyfriend", "Father", "Friend"], occasions: ["Birthday"], reasonTag: "Fresh Aquatic Scent", img: "images/products/hydra-perfume.jpg", link: "https://fktr.in/RYUzCy4" },
+    { id: "prod_008", title: "Pink Plastic Tumbler", desc: "Aesthetic Travel Straw Cup for Cold Drinks", vibe: "Aesthetic", target: ["Sister", "Girlfriend", "Friend"], occasions: ["Birthday", "Friendship Day"], reasonTag: "Trending Aesthetic", img: "images/products/pink-plastic-tumbler.jpg", link: "https://fktr.in/LdBcXh5" },
+    { id: "prod_009", title: "Pearl Handle Coffee Mug", desc: "Cute Ceramic Pearl Handle Coffee Cup", vibe: "Aesthetic", target: ["Sister", "Girlfriend", "Mother", "Friend"], occasions: ["Birthday", "Friendship Day"], reasonTag: "Cute Desk Essential", img: "images/products/pearl-coffee-mug.jpg", link: "https://fktr.in/2o4Zb8A" },
+    { id: "prod_010", title: "Floral & Butterfly Wall Frames", desc: "Set of 6 Aesthetic Wall Decor Art Frames", vibe: "Aesthetic", target: ["Sister", "Girlfriend", "Mother", "Friend"], occasions: ["Birthday", "Festival"], reasonTag: "Room Makeover Pick", img: "images/products/wall-frame-set-6.jpg", link: "https://fktr.in/OxuS8ul" },
+    { id: "prod_011", title: "Saturn Crystal Ball Decor", desc: "3D Glowing Crystal Sphere Desk Decor", vibe: "Aesthetic", target: ["Brother", "Sister", "Friend", "Father", "Mother"], occasions: ["Birthday", "Anniversary", "Festival"], reasonTag: "3D Ambient Glow", img: "images/products/saturn.jpg", link: "https://fktr.in/87EgaG7" },
+    { id: "prod_012", title: "3-Mode LED Desk Lamp", desc: "Rechargeable Flexible Gooseneck Study Light", vibe: "Techie", target: ["Brother", "Sister", "Friend"], occasions: ["Birthday", "Festival"], reasonTag: "Study & Work Item", img: "images/products/led-study-lamp.jpg", link: "https://fktr.in/7hDA40a" },
+    { id: "prod_013", title: "Rabbit USB Night Light", desc: "Cute Soft Silicone Rechargeable Lamp", vibe: "Aesthetic", target: ["Sister", "Girlfriend", "Friend"], occasions: ["Birthday", "Friendship Day"], reasonTag: "Cozy Night Lamp", img: "images/products/rabbit.jpg", link: "https://fktr.in/tosKE5q" },
+    { id: "prod_014", title: "Jewellery Gift Set Box", desc: "Elegant Jewellery Gift Box Set for Her", vibe: "Fashion", target: ["Sister", "Girlfriend", "Mother"], occasions: ["Birthday", "Anniversary", "Valentine's Day"], reasonTag: "Special Gift For Her 💖", img: "images/products/jewellery-gift-set.jpg", link: "https://fktr.in/DvY8Syy" },
+    { id: "prod_015", title: "Macrame 3-Tier Floating Shelf", desc: "Handmade Natural Wooden Hanging Wall Shelf", vibe: "Aesthetic", target: ["Sister", "Girlfriend", "Mother", "Friend"], occasions: ["Birthday", "Festival"], reasonTag: "Boho Home Decor", img: "images/products/macrame-shelf-3tier.jpg", link: "https://fktr.in/nDSezm6" },
+    { id: "prod_016", title: "Kids Digital Action Camera", desc: "2.0\" Display Screen HD Video Camera Toy", vibe: "Techie", target: ["Brother", "Sister"], occasions: ["Birthday", "Festival"], reasonTag: "Action Camera Gear", img: "images/products/kids-camera.jpg", link: "https://fktr.in/99BrGav" },
+    { id: "prod_017", title: "Astronaut Star Projector", desc: "3D Galaxy Ambient Night Sky Projector Lamp", vibe: "Techie", target: ["Brother", "Sister", "Friend", "Girlfriend", "Boyfriend"], occasions: ["Birthday", "Anniversary", "Festival"], reasonTag: "Top Room Projector 🚀", img: "images/products/projector.jpg", link: "https://fktr.in/Tb8mY5R" },
+    { id: "prod_018", title: "Pharaoh K12 Speaker", desc: "Wireless Bluetooth Karaoke Speaker with Mic", vibe: "Techie", target: ["Brother", "Sister", "Friend"], occasions: ["Birthday", "Friendship Day", "Festival"], reasonTag: "Party Audio Gear 🎉", img: "images/products/speaker.jpg", link: "https://fktr.in/lU3c4AF" },
+    { id: "prod_019", title: "Pink & Ivory Cotton Tote Bag", desc: "Handcrafted Woven Cotton Shoulder Tote Bag", vibe: "Aesthetic", target: ["Sister", "Girlfriend", "Mother"], occasions: ["Birthday", "Anniversary", "Festival"], reasonTag: "Cotton Tote Bag", img: "images/products/tote-bag.jpg", link: "https://fktr.in/11c1iDx" },
+    { id: "prod_020", title: "Women Blue Cosmetic Bag", desc: "Travel Toiletries & Makeup Pouch Organizer", vibe: "Aesthetic", target: ["Sister", "Girlfriend", "Mother"], occasions: ["Birthday", "Anniversary", "Festival"], reasonTag: "Travel Pouch", img: "images/products/cosmetic-bag.jpg", link: "https://fktr.in/FfT4LwA" },
+    { id: "prod_021", title: "Women Green & White Bag", desc: "Trendy Leatherette Shoulder Handbag", vibe: "Fashion", target: ["Sister", "Girlfriend", "Mother"], occasions: ["Birthday", "Anniversary", "Festival"], reasonTag: "Chic Handbag", img: "images/products/women-green-bag.jpg", link: "https://fktr.in/7B905x9" },
+    { id: "prod_022", title: "Blue Dial Analog Watch", desc: "Classic Stainless Steel Wrist Watch for Men", vibe: "Fashion", target: ["Brother", "Boyfriend", "Father", "Friend"], occasions: ["Birthday", "Anniversary", "Festival"], reasonTag: "Classic Wrist Watch", img: "images/products/blue-watch.jpg", link: "https://fktr.in/hw4EuTu" },
+    { id: "prod_023", title: "Peter England Everyday Watch", desc: "Formal Leather Strap Wrist Watch for Men", vibe: "Fashion", target: ["Brother", "Boyfriend", "Father"], occasions: ["Birthday", "Anniversary", "Festival"], reasonTag: "Formal Wear Watch", img: "images/products/watch1.jpg", link: "https://fktr.in/2PCt7Rv" },
+    { id: "prod_024", title: "Peter England Premium Watch", desc: "Luxury Analog Dress Watch for Occasions", vibe: "Fashion", target: ["Brother", "Boyfriend", "Father"], occasions: ["Birthday", "Anniversary"], reasonTag: "Premium Luxury Watch", img: "images/products/watch2.jpg", link: "https://fktr.in/4mE66ek" }
 ];
 
-document.querySelector(".find-btn").addEventListener("click", function(){
+/**
+ * -----------------------------------------------------------------------------
+ * 8.3 GLOBAL APPLICATION STATE MANAGEMENT OBJECT
+ * -----------------------------------------------------------------------------
+ */
+const studioStateConfig = {
+    currentRelationSelection: "ALL",
+    currentOccasionSelection: "ALL",
+    currentVibeSelection: "ALL",
+    currentSearchQueryText: ""
+};
 
-    let selectedRelation = document.getElementById("relation").value;
-    let selectedAge = document.getElementById("age").value;
-    let selectedBudget = document.getElementById("budget").value;
-    let result = document.getElementById("results");
+/**
+ * -----------------------------------------------------------------------------
+ * 8.4 CORE FILTERING AND DYNAMIC GRID RENDERING ENGINE
+ * -----------------------------------------------------------------------------
+ */
+function executeStudioGridRendering() {
+    const activeRelation = studioStateConfig.currentRelationSelection;
+    const activeOccasion = studioStateConfig.currentOccasionSelection;
+    const activeVibe = studioStateConfig.currentVibeSelection;
+    const activeSearch = studioStateConfig.currentSearchQueryText;
 
-    let filteredProducts = productsList.filter(item => {
-        let budgetMatch = (selectedBudget === "ALL" || item.budget === selectedBudget);
-        let ageMatch = (selectedAge === "ALL" || item.ageGroup.includes(selectedAge));
-        let relationMatch = (selectedRelation === "ALL" || item.target.includes(selectedRelation));
+    const productsGridElement = document.getElementById("productsGridContainer");
+    const productCounterElement = document.getElementById("productCounterBadge");
 
-        return budgetMatch && ageMatch && relationMatch;
+    const matchedProductsList = productsDatabaseMatrix.filter(productItem => {
+        const passesRelationFilter = (activeRelation === "ALL" || productItem.target.includes(activeRelation));
+        
+        let passesOccasionFilter = true;
+        if (activeOccasion !== "ALL") {
+            passesOccasionFilter = productItem.occasions.includes(activeOccasion);
+        }
+        
+        const passesVibeFilter = (activeVibe === "ALL" || productItem.vibe === activeVibe);
+
+        const passesSearchFilter = activeSearch === "" || 
+            productItem.title.toLowerCase().includes(activeSearch) || 
+            productItem.desc.toLowerCase().includes(activeSearch) ||
+            productItem.reasonTag.toLowerCase().includes(activeSearch);
+
+        return passesRelationFilter && passesOccasionFilter && passesVibeFilter && passesSearchFilter;
     });
 
-    if (filteredProducts.length > 0) {
-        let cardsHTML = '<div class="gift-grid">';
-        filteredProducts.forEach(prod => {
-            cardsHTML += `
-            <div class="gift-card">
-                <img src="${prod.img}">
-                <h3>${prod.title}</h3>
-                <p>${prod.desc}</p>
-                <a href="${prod.link}" target="_blank">View Deal</a>
+    productCounterElement.innerText = `${matchedProductsList.length} Products`;
+
+    if (matchedProductsList.length > 0) {
+        let cardsHtmlBuffer = '';
+        matchedProductsList.forEach(itemData => {
+            cardsHtmlBuffer += `
+            <div class="studio-product-card" data-card-id="${itemData.id}">
+                <div>
+                    <div class="card-badge-row">
+                        <span class="reason-tag">${itemData.reasonTag}</span>
+                    </div>
+                    <div class="card-image-box">
+                        <img class="card-img-element" src="${itemData.img}" alt="${itemData.title}" onerror="this.src='images/placeholder.jpg'">
+                    </div>
+                    <h3 class="card-title-text">${itemData.title}</h3>
+                    <p class="card-desc-text">${itemData.desc}</p>
+                </div>
+                <a href="${itemData.link}" target="_blank" rel="noopener" class="card-deal-btn">View Deal 🔥</a>
             </div>`;
         });
-        cardsHTML += '</div>';
-        result.innerHTML = cardsHTML;
+        productsGridElement.innerHTML = cardsHtmlBuffer;
     } else {
-        result.innerHTML = `
-        <div class="product-card">
-            <h3>😔 No Exact Gift Match Found</h3>
-            <p>Try selecting 'Select Budget' or 'Select Age' to view all recommended gifts for this relation.</p>
-            <a href="giftcards.html">Browse Gift Cards</a>
+        productsGridElement.innerHTML = `
+        <div class="empty-results-state">
+            <h3>😔 No Products Found</h3>
+            <p>No matching gifts found for this combination. Try selecting 'Any Event' or another filter.</p>
         </div>`;
     }
+}
 
+/**
+ * -----------------------------------------------------------------------------
+ * 8.5 PILL GROUP LISTENER BINDING HELPER
+ * -----------------------------------------------------------------------------
+ */
+function bindPillContainerEventListeners(containerDomId, stateTargetKey) {
+    const parentContainer = document.getElementById(containerDomId);
+    if (!parentContainer) return;
+
+    const pillElementsList = parentContainer.querySelectorAll('.studio-pill-item');
+    pillElementsList.forEach(singlePill => {
+        singlePill.addEventListener('click', () => {
+            if (singlePill.classList.contains('disabled')) return;
+            
+            pillElementsList.forEach(p => p.classList.remove('active'));
+            singlePill.classList.add('active');
+
+            studioStateConfig[stateTargetKey] = singlePill.getAttribute('data-value');
+            executeStudioGridRendering();
+        });
+    });
+}
+
+bindPillContainerEventListeners('relationPillGroupContainer', 'currentRelationSelection');
+bindPillContainerEventListeners('occasionPillGroupContainer', 'currentOccasionSelection');
+bindPillContainerEventListeners('vibePillGroupContainer', 'currentVibeSelection');
+
+/**
+ * -----------------------------------------------------------------------------
+ * 8.6 LIVE SEARCH INPUT EVENT LISTENER
+ * -----------------------------------------------------------------------------
+ */
+const searchInputFieldElement = document.getElementById("studioSearchInput");
+if (searchInputFieldElement) {
+    searchInputFieldElement.addEventListener('input', (eventObject) => {
+        studioStateConfig.currentSearchQueryText = eventObject.target.value.toLowerCase().trim();
+        executeStudioGridRendering();
+    });
+}
+
+/**
+ * -----------------------------------------------------------------------------
+ * 8.7 STRICT LOGICAL CROSS-VALIDATION GUARD (RELATION VS OCCASION)
+ * -----------------------------------------------------------------------------
+ */
+const relationPillItemsList = document.querySelectorAll('#relationPillGroupContainer .studio-pill-item');
+relationPillItemsList.forEach(relationPill => {
+    relationPill.addEventListener('click', () => {
+        const selectedRelationVal = relationPill.getAttribute('data-value');
+        const occasionPillItemsList = document.querySelectorAll('#occasionPillGroupContainer .studio-pill-item');
+
+        const familyMaleRelations = ['Brother', 'Father'];
+
+        occasionPillItemsList.forEach(occasionPill => {
+            const occasionVal = occasionPill.getAttribute('data-value');
+            occasionPill.classList.remove('disabled');
+
+            // Lock Anniversary & Valentine's for family members
+            if ((familyMaleRelations.includes(selectedRelationVal) || selectedRelationVal === 'Sister') && 
+                (occasionVal === 'Anniversary' || occasionVal === "Valentine's Day")) {
+                occasionPill.classList.add('disabled');
+                if (occasionPill.classList.contains('active')) {
+                    occasionPill.classList.remove('active');
+                    document.querySelector('#occasionPillGroupContainer .studio-pill-item[data-value="ALL"]').classList.add('active');
+                    studioStateConfig.currentOccasionSelection = "ALL";
+                }
+            }
+        });
+        
+        executeStudioGridRendering();
+    });
+});
+
+/**
+ * -----------------------------------------------------------------------------
+ * 8.8 MASTER RESET ALL CONTROLLER EVENT HANDLER
+ * -----------------------------------------------------------------------------
+ */
+const resetFiltersMasterButton = document.getElementById('resetAllFiltersBtn');
+if (resetFiltersMasterButton) {
+    resetFiltersMasterButton.addEventListener('click', () => {
+        if (searchInputFieldElement) searchInputFieldElement.value = "";
+        
+        studioStateConfig.currentRelationSelection = "ALL";
+        studioStateConfig.currentOccasionSelection = "ALL";
+        studioStateConfig.currentVibeSelection = "ALL";
+        studioStateConfig.currentSearchQueryText = "";
+
+        const allPillGroupContainers = ['relationPillGroupContainer', 'occasionPillGroupContainer', 'vibePillGroupContainer'];
+        allPillGroupContainers.forEach(containerId => {
+            const containerEl = document.getElementById(containerId);
+            if (containerEl) {
+                const pills = containerEl.querySelectorAll('.studio-pill-item');
+                pills.forEach(pill => {
+                    pill.classList.remove('active', 'disabled');
+                    if (pill.getAttribute('data-value') === 'ALL') {
+                        pill.classList.add('active');
+                    }
+                });
+            }
+        });
+
+        executeStudioGridRendering();
+    });
+}
+
+/**
+ * -----------------------------------------------------------------------------
+ * 8.9 SCROLL TO TOP HELPER UTILITY
+ * -----------------------------------------------------------------------------
+ */
+function executeScrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+/**
+ * -----------------------------------------------------------------------------
+ * 8.10 APPLICATION STARTUP EVENT INITIALIZER
+ * -----------------------------------------------------------------------------
+ */
+document.addEventListener("DOMContentLoaded", () => {
+    executeStudioGridRendering();
 });
 </script>
 

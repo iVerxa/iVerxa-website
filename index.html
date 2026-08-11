@@ -7,7 +7,7 @@
     <title>iVerxa Finds | Curated Deals & Smart Recommendations</title>
 
     <meta name="google-site-verification" content="LijkkL2CSjMQVJbNlQ_ZaYyhvx5YOYmb2FTAO7LZ7fs" />
-    <meta name="description" content="Discover handpicked products, digital gift cards, and smart gift recommendations curated by Sairaj Halkanche.">
+    <meta name="description" content="Discover handpicked products, digital gift cards, and smart gift recommendations curated for smart shoppers.">
 
     <link rel="stylesheet" href="css/style.css">
 
@@ -46,7 +46,7 @@
         /* Hero Section */
         .hero-section {
             position: relative;
-            padding: 85px 20px 60px 20px;
+            padding: 95px 20px 75px 20px;
             text-align: center;
             background: radial-gradient(circle at 50% 25%, rgba(79, 124, 255, 0.18) 0%, rgba(8, 12, 20, 1) 70%);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -68,7 +68,7 @@
             font-size: 18px;
             color: var(--text-muted);
             max-width: 620px;
-            margin: 0 auto 35px auto;
+            margin: 0 auto 40px auto;
             line-height: 1.6;
         }
 
@@ -78,7 +78,6 @@
             gap: 16px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 50px;
         }
 
         .btn-primary {
@@ -113,40 +112,6 @@
         .btn-secondary:hover {
             border-color: var(--accent-blue);
             transform: translateY(-3px);
-        }
-
-        /* Live Activity & Engagement Counter Bar */
-        .live-counter-bar {
-            max-width: 900px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            background: rgba(17, 24, 39, 0.6);
-            border: 1px solid var(--border-glow);
-            padding: 22px 30px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .counter-item {
-            text-align: center;
-        }
-
-        .counter-number {
-            font-size: 26px;
-            font-weight: 800;
-            color: var(--accent-cyan);
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .counter-label {
-            font-size: 13px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 600;
         }
 
         /* Feature Cards Section */
@@ -230,37 +195,9 @@
             gap: 6px;
         }
 
-        /* Creator Footer Banner */
-        .creator-banner {
-            background: linear-gradient(135deg, #111827 0%, #0B0F19 100%);
-            border: 1px solid var(--border-glow);
-            border-radius: 20px;
-            padding: 35px 40px;
-            margin-top: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .creator-banner h3 {
-            font-size: 22px;
-            color: #FFFFFF;
-            margin: 0 0 6px 0;
-        }
-
-        .creator-banner p {
-            color: var(--text-muted);
-            margin: 0;
-            font-size: 15px;
-        }
-
         @media (max-width: 768px) {
             .hero-title { font-size: 36px; }
             .hero-subtitle { font-size: 16px; }
-            .live-counter-bar { grid-template-columns: 1fr 1fr; }
-            .creator-banner { text-align: center; justify-content: center; }
         }
     </style>
 </head>
@@ -270,7 +207,6 @@
     <!-- Navigation Bar -->
     <nav>
         <div class="logo">
-            <!-- Transparent PNG Logo -->
             <a href="index.html">
                 <img src="images/logo.png" alt="iVerxa Finds Logo" onerror="this.src='images/logo.jpeg'">
             </a>
@@ -293,28 +229,12 @@
         </h1>
 
         <p class="hero-subtitle">
-            Explore handpicked products, instant digital gift cards, and smart age-based gift recommendations in one place.
+            Explore handpicked products, instant digital gift cards, and smart gift recommendations all in one place.
         </p>
 
         <div class="cta-group">
             <a href="handpicked.html" class="btn-primary">Explore Products 🔥</a>
             <a href="giftfinder.html" class="btn-secondary">Launch Gift Finder 🔍</a>
-        </div>
-
-        <!-- Live Platform Activity Stats Bar -->
-        <div class="live-counter-bar">
-            <div class="counter-item">
-                <span class="counter-number">1,250+</span>
-                <span class="counter-label">Product Clicks</span>
-            </div>
-            <div class="counter-item">
-                <span class="counter-number">100%</span>
-                <span class="counter-label">Verified Deals</span>
-            </div>
-            <div class="counter-item">
-                <span class="counter-number">19+</span>
-                <span class="counter-label">Curated Items</span>
-            </div>
         </div>
     </section>
 
@@ -322,8 +242,8 @@
     <main class="main-container">
         
         <div class="section-header">
-            <h2>Browse Categories</h2>
-            <p>Select a category below to discover deals</p>
+            <h2>Browse Collections</h2>
+            <p>Select a section below to get started</p>
         </div>
 
         <div class="feature-grid">
@@ -343,7 +263,7 @@
                 <div>
                     <span class="icon-box">🔍</span>
                     <h3>Smart Gift Finder</h3>
-                    <p>Find age-appropriate and budget-friendly gift ideas tailored for family, friends, or loved ones.</p>
+                    <p>Find tailored and budget-friendly gift ideas designed for family, friends, and loved ones.</p>
                 </div>
                 <span class="card-action">Find Gifts &rarr;</span>
             </a>
@@ -360,20 +280,11 @@
 
         </div>
 
-        <!-- Creator Banner -->
-        <div class="creator-banner">
-            <div>
-                <h3>Created by Sairaj Halkanche</h3>
-                <p>Designed for a fast, clean, and distraction-free shopping experience.</p>
-            </div>
-            <a href="about.html" class="btn-secondary" style="padding: 12px 24px; font-size: 14px;">About Platform &rarr;</a>
-        </div>
-
     </main>
 
     <!-- Footer -->
     <footer class="footer">
-        Crafted with ❤️ by Sairaj Halkanche in Maharashtra, India 🇮🇳
+        Crafted with ❤️ in Maharashtra, India 🇮🇳
         <br><br>
         <span>© 2026 iVerxa Finds. All Rights Reserved.</span>
     </footer>

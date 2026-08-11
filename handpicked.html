@@ -1,158 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- ========================================================================== -->
+    <!-- 1. APPLICATION METADATA & CONFIGURATION                                    -->
+    <!-- ========================================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#030712">
+    <meta name="description" content="iVerxa Finds - Handpicked Curated Products">
+    <meta name="author" content="iVerxa Finds Development Team">
+    
     <title>Handpicked Products | iVerxa Finds</title>
+    
+    <!-- EXTERNAL STYLESHEET LINK -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- ========================================================================== -->
+    <!-- 2. ULTRA-PREMIUM CSS STYLING & CLEAN TAILORED FOOTER ARCHITECTURE          -->
+    <!-- ========================================================================== -->
     <style>
-        .container {
+        :root {
+            --bg-deep: #030712;
+            --bg-card: rgba(15, 23, 42, 0.78);
+            --bg-card-hover: rgba(30, 41, 59, 0.9);
+            
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-active: #6366F1;
+            
+            --gradient-blue-purple: linear-gradient(135deg, #6366F1 0%, #A855F7 100%);
+            --gradient-hero-text: linear-gradient(135deg, #FFFFFF 0%, #C7D2FE 40%, #A855F7 80%, #F43F5E 100%);
+            
+            --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 30px;
+            --radius-pill: 50px;
+            
+            --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --shadow-hover: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(99, 102, 241, 0.3);
+            
+            --transition-smooth: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --backdrop-blur: blur(25px);
+        }
+
+        html {
+            box-sizing: border-box;
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        *, *::before, *::after {
+            box-sizing: inherit;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-base);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+            background-attachment: fixed;
+            color: #FFFFFF;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        button { background: none; border: none; font: inherit; cursor: pointer; outline: none; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* Logo Fix */
+        .logo img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        .logo img:hover { transform: scale(1.05); }
+
+        /* Container Layout */
+        .studio-container {
             max-width: 1200px;
-            margin: 40px auto;
+            margin: 50px auto;
             padding: 0 20px;
         }
 
-        .page-title {
+        .page-header-box {
             text-align: center;
-            margin-bottom: 8px;
-            font-size: 32px;
-            color: #ffffff;
+            margin-bottom: 35px;
+        }
+
+        .page-title {
+            font-size: 40px;
+            font-weight: 900;
+            background: var(--gradient-hero-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
         }
 
         .page-desc {
-            text-align: center;
-            color: #CBD5E1;
-            margin-bottom: 25px;
+            color: #94A3B8;
+            font-size: 17px;
+            max-width: 550px;
+            margin: 0 auto;
         }
 
         /* Search Bar Styling */
-        .search-box {
+        .search-box-wrapper {
             max-width: 600px;
             margin: 0 auto 30px auto;
-            display: flex;
             position: relative;
         }
 
         .search-input {
             width: 100%;
-            padding: 16px 20px;
-            font-size: 16px;
-            border-radius: 30px;
-            border: 2px solid #334155;
-            background: #1E293B;
+            padding: 16px 24px 16px 50px;
+            font-size: 15px;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(15, 23, 42, 0.85);
             color: #ffffff;
             outline: none;
-            transition: all 0.3s ease;
+            transition: var(--transition-smooth);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .search-input:focus {
-            border-color: #4F7CFF;
-            box-shadow: 0 0 15px rgba(79, 124, 255, 0.4);
+            border-color: var(--border-active);
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.35), inset 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        /* Clean Filter Bar */
+        .search-icon-fixed {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            opacity: 0.6;
+        }
+
+        /* Filter Bar */
         .filter-bar {
             display: flex;
             gap: 12px;
             overflow-x: auto;
-            padding: 10px 5px 20px 5px;
+            padding: 10px 5px 25px 5px;
             margin-bottom: 30px;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .filter-btn {
-            background: #1E293B;
+            background: rgba(30, 41, 59, 0.7);
             color: #CBD5E1;
-            border: 1px solid #334155;
+            border: 1px solid var(--border-subtle);
             padding: 12px 22px;
-            border-radius: 25px;
-            font-size: 15px;
+            border-radius: var(--radius-pill);
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             white-space: nowrap;
-            transition: all 0.3s ease;
+            transition: var(--transition-smooth);
         }
 
         .filter-btn:hover, .filter-btn.active {
-            background: #4F7CFF;
+            background: var(--gradient-blue-purple);
             color: #ffffff;
-            border-color: #4F7CFF;
-            box-shadow: 0 4px 15px rgba(79, 124, 255, 0.4);
+            border-color: transparent;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.45);
+            transform: translateY(-2px);
         }
 
         /* Grid System */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
             gap: 25px;
         }
 
         /* Product Card Design */
         .custom-card {
-            background: #1E293B;
-            border-radius: 16px;
-            padding: 20px;
+            background: var(--bg-card);
+            backdrop-filter: var(--backdrop-blur);
+            border-radius: var(--radius-md);
+            padding: 22px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: all 0.3s ease;
-            border: 1px solid #334155;
+            transition: var(--transition-smooth);
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-card);
         }
 
         .custom-card:hover {
-            transform: translateY(-6px);
-            border-color: #4F7CFF;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-8px);
+            border-color: var(--border-active);
+            box-shadow: var(--shadow-hover);
+            background: var(--bg-card-hover);
         }
 
-        /* Image Zooming Fix: Object Fit Contain */
+        .image-box {
+            width: 100%;
+            height: 230px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 16px;
+            background: #070B14;
+            padding: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
         .custom-card img {
             width: 100%;
-            height: 220px;
-            object-fit: contain;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            background: #0F172A;
-            padding: 10px;
-            box-sizing: border-box;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.5s ease;
+        }
+
+        .custom-card:hover img {
+            transform: scale(1.08);
         }
 
         .custom-card h3 {
             font-size: 18px;
             color: #ffffff;
             margin-bottom: 8px;
-            line-height: 1.3;
+            font-weight: 800;
         }
 
         .custom-card p {
-            font-size: 14px;
+            font-size: 13px;
             color: #94A3B8;
             margin-bottom: 20px;
+            line-height: 1.5;
             flex-grow: 1;
         }
 
         .custom-card .deal-btn {
             display: block;
             text-align: center;
-            background: #4F7CFF;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: #ffffff;
-            padding: 12px;
-            border-radius: 10px;
+            padding: 13px;
+            border-radius: 12px;
             text-decoration: none;
-            font-weight: bold;
-            transition: background 0.3s ease;
+            font-weight: 800;
+            font-size: 14px;
+            transition: var(--transition-smooth);
         }
 
         .custom-card .deal-btn:hover {
-            background: #3567ff;
+            background: var(--gradient-blue-purple);
+            border-color: transparent;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
         }
 
         .no-results {
             text-align: center;
-            color: #CBD5E1;
+            color: #94A3B8;
             font-size: 18px;
             grid-column: 1 / -1;
-            padding: 40px;
+            padding: 60px 20px;
+            font-weight: 600;
+        }
+
+        /* ---------------------------------------------------------------------- */
+        /* CLEAN TAILORED MINIMALIST FOOTER (WITHOUT STUDIO)                      */
+        /* ---------------------------------------------------------------------- */
+        .unique-studio-footer {
+            background: #060913;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 60px 20px 40px 20px;
+            margin-top: 80px;
+        }
+
+        .footer-content-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 16px;
+            font-weight: 800;
+            color: #FFFFFF;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .footer-col p {
+            color: #94A3B8;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer-links-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links-list li a {
+            color: #94A3B8;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links-list li a:hover {
+            color: #38BDF8;
+        }
+
+        .footer-bottom-bar {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .footer-bottom-bar p {
+            color: #64748B;
+            font-size: 13px;
+        }
+
+        .back-to-top-link {
+            color: #6366F1;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .back-to-top-link:hover {
+            color: #A855F7;
         }
     </style>
 </head>
@@ -160,7 +362,9 @@
 
 <nav>
     <div class="logo">
-        <img src="images/logo.jpeg" alt="iVerxa Logo">
+        <a href="index.html">
+            <img src="images/logo.png" alt="iVerxa Logo" onerror="this.src='images/logo.jpeg'">
+        </a>
     </div>
     <ul class="menu">
         <li><a href="index.html">Home</a></li>
@@ -172,13 +376,16 @@
     </ul>
 </nav>
 
-<div class="container">
-    <h1 class="page-title">🔥 Handpicked Products</h1>
-    <p class="page-desc">Explore top-rated products curated specifically for you.</p>
+<div class="studio-container">
+    <div class="page-header-box">
+        <h1 class="page-title">🔥 Handpicked Products</h1>
+        <p class="page-desc">Explore top-rated products curated specifically for you.</p>
+    </div>
 
     <!-- Search Bar -->
-    <div class="search-box">
-        <input type="text" id="searchInput" class="search-input" placeholder="Search products (e.g. watch, bag, perfume, camera)..." onkeyup="searchProducts()">
+    <div class="search-box-wrapper">
+        <span class="search-icon-fixed">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search products (e.g. watch, bag, perfume, lamp)..." onkeyup="searchProducts()">
     </div>
 
     <!-- Category Filters -->
@@ -195,10 +402,35 @@
     <div class="grid-container" id="products-grid"></div>
 </div>
 
-<footer class="footer">
-    Crafted with ❤️ in Maharashtra, India 🇮🇳
-    <br><br>
-    © 2026 iVerxa Finds. All Rights Reserved.
+<!-- CLEAN TAILORED FOOTER (WITHOUT STUDIO) -->
+<footer class="unique-studio-footer">
+    <div class="footer-content-wrapper">
+        <div class="footer-col">
+            <h4>iVerxa Finds</h4>
+            <p>Your ultimate destination for verified daily deals, smart gift recommendations, and handpicked premium lifestyle products.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Quick Navigation</h4>
+            <ul class="footer-links-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="handpicked.html">Handpicked Collection</a></li>
+                <li><a href="giftfinder.html">Smart Gift Finder</a></li>
+                <li><a href="giftcards.html">Digital Gift Cards</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Support & Info</h4>
+            <ul class="footer-links-list">
+                <li><a href="contact.html">Contact Support</a></li>
+                <li><a href="about.html">About Our Platform</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer-bottom-bar">
+        <p>© 2026 iVerxa Finds. All Rights Reserved.</p>
+        <span class="back-to-top-link" onclick="executeScrollToTop()">↑ Back To Top</span>
+    </div>
 </footer>
 
 <script>
@@ -213,6 +445,7 @@ const productsData = [
     { title: "Women Green & White Bag", category: "Bags", keywords: "bag shoulder bag women bag handbag tote", desc: "Trendy & stylish shoulder bag for daily use.", img: "images/products/women-green-bag.jpg", link: "https://fktr.in/7B905x9" },
     { title: "Pink & Ivory Cotton Tote Bag", category: "Bags", keywords: "bag tote bag cotton bag handbag schoolbag", desc: "Handcrafted woven cotton tote shoulder bag.", img: "images/products/tote-bag.jpg", link: "https://fktr.in/11c1iDx" },
     { title: "Women Blue Cosmetic Bag", category: "Bags", keywords: "bag cosmetic bag pouch travel pouch makeup", desc: "Compact travel makeup pouch & pouch organizer.", img: "images/products/cosmetic-bag.jpg", link: "https://fktr.in/FfT4LwA" },
+    { title: "Jewellery Gift Set Box", category: "Bags", keywords: "jewellery gift set box gift for women girls anniversary birthday", desc: "Elegant jewellery gift set box perfect for special occasions.", img: "images/products/jewellery-gift-set.jpg", link: "https://fktr.in/DvY8Syy" },
 
     // Perfumes Category
     { title: "Raw Eau De Parfum (20ml)", category: "Perfumes", keywords: "perfume scent fragrance raw edp", desc: "Compact long-lasting everyday fragrance.", img: "images/products/raw-perfume.jpg", link: "https://fktr.in/YJeHEwk" },
@@ -224,11 +457,16 @@ const productsData = [
     { title: "Pharaoh K12 Speaker", category: "Gadgets", keywords: "speaker bluetooth speaker gadget music sound", desc: "Portable Bluetooth karaoke speaker with mic.", img: "images/products/speaker.jpg", link: "https://fktr.in/lU3c4AF" },
     { title: "Kids Digital Action Camera", category: "Gadgets", keywords: "camera kids camera video gadget digital camera", desc: "2.0\" color display HD video recording camera.", img: "images/products/kids-camera.jpg", link: "https://fktr.in/99BrGav" },
     { title: "LCD Writing Tablet 8.5\"", category: "Gadgets", keywords: "tablet writing pad digital slate gadget school", desc: "Reusable digital slate board for notes & drawing.", img: "images/writing-tablet.jpg", link: "https://fktr.in/2ilGq4U" },
+    { title: "Pink Plastic Tumbler", category: "Gadgets", keywords: "tumbler bottle cup pink water bottle aesthetic travel cup", desc: "Trendy pink tumbler for daily hydration and travel.", img: "images/products/pink-plastic-tumbler.jpg", link: "https://fktr.in/LdBcXh5" },
+    { title: "3 Color Mode LED Study Lamp", category: "Gadgets", keywords: "lamp desk lamp study light led rechargeable flexible gooseneck", desc: "Flexible rechargeable gooseneck LED study lamp with 3 color modes.", img: "images/products/led-study-lamp.jpg", link: "https://fktr.in/7hDA40a" },
 
     // Home & Decor Category
     { title: "Astronaut Star Projector", category: "Decor", keywords: "lamp projector star galaxy decor light", desc: "3D galaxy laser ambient night light.", img: "images/products/projector.jpg", link: "https://fktr.in/Tb8mY5R" },
     { title: "Saturn Crystal Ball Decor", category: "Decor", keywords: "decor crystal ball saturn light desk", desc: "Glowing 3D crystal ball desk ornament.", img: "images/products/saturn.jpg", link: "https://fktr.in/87EgaG7" },
     { title: "Rabbit USB Night Light", category: "Decor", desc: "Cute rechargeable soft silicone desk lamp.", keywords: "lamp night light rabbit decor usb light", img: "images/products/rabbit.jpg", link: "https://fktr.in/tosKE5q" },
+    { title: "Pearl Handle Coffee Mug", category: "Decor", keywords: "mug coffee mug pearl handle ceramic cup decor desk", desc: "Aesthetic pearl handle coffee mug for desk and kitchen decor.", img: "images/products/pearl-coffee-mug.jpg", link: "https://fktr.in/2o4Zb8A" },
+    { title: "Floral & Butterfly Wall Frame (Set of 6)", category: "Decor", keywords: "wall frame decor floral butterfly frame set home decor photo frame", desc: "Pack of 6 vibrant floral and butterfly wall frames for aesthetic room decor.", img: "images/products/wall-frame-set-6.jpg", link: "https://fktr.in/OxuS8ul" },
+    { title: "Macrame 3-Tier Floating Shelf", category: "Decor", keywords: "macrame shelf wall hanging floating shelf wooden pine decor", desc: "Natural pine wood 3-tier macrame wall hanging floating shelf.", img: "images/products/macrame-shelf-3tier.jpg", link: "https://fktr.in/nDSezm6" },
 
     // Collectibles Category
     { title: "Astronaut Keychain", category: "Collectibles", keywords: "keychain astronaut space collectible key ring", desc: "High-quality metallic space astronaut keychain.", img: "images/products/astronaut-keychain.jpg", link: "https://fktr.in/GTf82Im" },
@@ -251,11 +489,13 @@ function renderCards(data) {
         grid.innerHTML += `
             <div class="custom-card">
                 <div>
-                    <img src="${item.img}" alt="${item.title}">
+                    <div class="image-box">
+                        <img src="${item.img}" alt="${item.title}" onerror="this.src='images/placeholder.jpg'">
+                    </div>
                     <h3>${item.title}</h3>
                     <p>${item.desc}</p>
                 </div>
-                <a href="${item.link}" target="_blank" class="deal-btn">View Deal</a>
+                <a href="${item.link}" target="_blank" rel="noopener" class="deal-btn">View Deal 🔥</a>
             </div>
         `;
     });
@@ -263,7 +503,7 @@ function renderCards(data) {
 
 function filterCategory(catName, btnEl) {
     activeCategory = catName;
-    document.getElementById('searchInput').value = ''; // Clear search when switching tabs
+    document.getElementById('searchInput').value = '';
     
     document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
     if(btnEl) btnEl.classList.add('active');
@@ -276,16 +516,13 @@ function searchProducts() {
     const query = document.getElementById('searchInput').value.toLowerCase().trim();
     
     if (query === '') {
-        // If search is empty, go back to current active category
         const filtered = productsData.filter(item => item.category === activeCategory);
         renderCards(filtered);
         return;
     }
 
-    // Deactivate category active tab highlight while searching globally
     document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
 
-    // Global Search across all items
     const searchResults = productsData.filter(item => 
         item.title.toLowerCase().includes(query) || 
         item.desc.toLowerCase().includes(query) ||
@@ -295,7 +532,10 @@ function searchProducts() {
     renderCards(searchResults);
 }
 
-// Load Watches by default on startup
+function executeScrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     filterCategory('Watches');
 });

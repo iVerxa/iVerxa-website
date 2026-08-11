@@ -1,159 +1,455 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- ========================================================================== -->
+    <!-- 1. APPLICATION METADATA & CONFIGURATION                                    -->
+    <!-- ========================================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#030712">
+    <meta name="description" content="iVerxa Finds - Secure Checkout Buyer Details">
+    <meta name="author" content="iVerxa Finds Development Team">
+    
     <title>Buyer Details | iVerxa Finds</title>
-
+    
+    <!-- EXTERNAL STYLESHEET LINK -->
     <link rel="stylesheet" href="css/style.css">
 
+    <!-- ========================================================================== -->
+    <!-- 2. ULTRA-PREMIUM CHECKOUT STUDIO CSS ARCHITECTURE                          -->
+    <!-- ========================================================================== -->
     <style>
-
-        .buyer-container{
-            max-width:700px;
-            margin:60px auto;
-            background:#1E293B;
-            padding:40px;
-            border-radius:20px;
+        :root {
+            --bg-deep: #030712;
+            --bg-card: rgba(15, 23, 42, 0.85);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-active: #6366F1;
+            
+            --gradient-blue-purple: linear-gradient(135deg, #6366F1 0%, #A855F7 100%);
+            --gradient-hero-text: linear-gradient(135deg, #FFFFFF 0%, #C7D2FE 40%, #A855F7 80%, #F43F5E 100%);
+            
+            --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 30px;
+            --radius-pill: 50px;
+            
+            --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(99, 102, 241, 0.15);
+            --transition-smooth: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --backdrop-blur: blur(25px);
         }
 
-        .buyer-container h1{
-            text-align:center;
-            margin-bottom:30px;
+        html {
+            box-sizing: border-box;
+            font-size: 16px;
+            scroll-behavior: smooth;
         }
 
-        .buyer-container label{
-            display:block;
-            margin-top:20px;
-            margin-bottom:8px;
-            font-weight:bold;
+        *, *::before, *::after {
+            box-sizing: inherit;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-base);
+            -webkit-font-smoothing: antialiased;
         }
 
-        .buyer-container input{
-            width:100%;
-            padding:15px;
-            border:none;
-            border-radius:10px;
-            background:#0F172A;
-            color:white;
-            font-size:16px;
+        body {
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+            background-attachment: fixed;
+            color: #FFFFFF;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        .continue-btn{
-            display:block;
-            width:100%;
-            margin-top:30px;
-            padding:16px;
-            border:none;
-            border-radius:12px;
-            background:#4F7CFF;
-            color:white;
-            font-size:18px;
-            font-weight:bold;
-            cursor:pointer;
-            text-decoration:none;
+        a { color: inherit; text-decoration: none; }
+        button { background: none; border: none; font: inherit; cursor: pointer; outline: none; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* Logo Fix */
+        .logo img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        .logo img:hover { transform: scale(1.05); }
+
+        /* Checkout Container Layout */
+        .buyer-container {
+            max-width: 650px;
+            margin: 60px auto;
+            background: var(--bg-card);
+            backdrop-filter: var(--backdrop-blur);
+            -webkit-backdrop-filter: var(--backdrop-blur);
+            padding: 45px;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            box-shadow: var(--shadow-card);
+            position: relative;
         }
 
-        .continue-btn:hover{
-            background:#3567ff;
+        .buyer-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #6366F1, #A855F7, transparent);
         }
 
-        .notes{
-            margin-top:35px;
-            background:#111827;
-            padding:20px;
-            border-radius:12px;
+        .buyer-container h1 {
+            text-align: center;
+            font-size: 30px;
+            font-weight: 900;
+            background: var(--gradient-hero-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
         }
 
-        .notes h3{
-            margin-bottom:15px;
+        .checkout-subtitle {
+            text-align: center;
+            color: #94A3B8;
+            font-size: 14px;
+            margin-bottom: 30px;
         }
 
-        .notes ul{
-            padding-left:20px;
-            color:#cbd5e1;
-            line-height:1.8;
+        /* Form Inputs */
+        .buyer-container label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #CBD5E1;
+            letter-spacing: 0.3px;
         }
 
+        .buyer-container input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            background: rgba(3, 7, 18, 0.85);
+            color: white;
+            font-size: 15px;
+            outline: none;
+            transition: var(--transition-smooth);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .buyer-container input:focus {
+            border-color: var(--border-active);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.35), inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .buyer-container input.error-shake {
+            border-color: #F43F5E;
+            animation: shake 0.3s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        /* Continue Button */
+        .continue-btn {
+            display: block;
+            width: 100%;
+            margin-top: 35px;
+            padding: 16px;
+            border: none;
+            border-radius: var(--radius-pill);
+            background: var(--gradient-blue-purple);
+            color: white;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: var(--transition-smooth);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.6);
+        }
+
+        /* Important Notes Box */
+        .notes {
+            margin-top: 40px;
+            background: rgba(3, 7, 18, 0.6);
+            border: 1px solid var(--border-subtle);
+            padding: 24px;
+            border-radius: 16px;
+        }
+
+        .notes h3 {
+            font-size: 15px;
+            font-weight: 800;
+            color: #38BDF8;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .notes ul {
+            padding-left: 18px;
+            color: #94A3B8;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .notes li {
+            margin-bottom: 8px;
+        }
+
+        /* ---------------------------------------------------------------------- */
+        /* UNIQUE CYBER-PUNK TRUST FOOTER                                         */
+        /* ---------------------------------------------------------------------- */
+        .cyber-trust-footer {
+            background: #040710;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 60px 20px 40px 20px;
+            margin-top: 90px;
+        }
+
+        .footer-grid-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-widget h4 {
+            font-size: 15px;
+            font-weight: 800;
+            color: #FFFFFF;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-widget p {
+            color: #94A3B8;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer-nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-nav-links li a {
+            color: #94A3B8;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-nav-links li a:hover {
+            color: #38BDF8;
+        }
+
+        .security-badge-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34D399;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .footer-terminal-bar {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .footer-terminal-bar p {
+            color: #64748B;
+            font-size: 13px;
+        }
+
+        .scroll-top-trigger {
+            color: #6366F1;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .scroll-top-trigger:hover {
+            color: #A855F7;
+        }
+
+        @media (max-width: 768px) {
+            .buyer-container { padding: 25px; margin: 30px 15px; }
+            .footer-terminal-bar { flex-direction: column; text-align: center; }
+        }
     </style>
-
 </head>
-
 <body>
 
+<!-- Navigation Bar -->
 <nav>
-
-<div class="logo">
-<img src="images/logo.jpeg">
-</div>
-
-<ul class="menu">
-<li><a href="index.html">Home</a></li>
-</ul>
-
+    <div class="logo">
+        <a href="index.html">
+            <img src="images/logo.jpeg" alt="iVerxa Logo">
+        </a>
+    </div>
+    <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="giftcards.html">Gift Cards</a></li>
+    </ul>
 </nav>
 
+<!-- Buyer Details Studio Container -->
 <div class="buyer-container">
+    <h1>🔒 Secure Checkout</h1>
+    <p class="checkout-subtitle">Enter your delivery details to receive your digital gift card code instantly.</p>
 
-<h1>Buyer Details</h1>
+    <label for="name">Full Name</label>
+    <input type="text" id="name" placeholder="Enter your full name" autocomplete="name" required>
 
-<label>Full Name</label>
-<input type="text" id="name" placeholder="Enter your full name" required>
+    <label for="email">Email Address</label>
+    <input type="email" id="email" placeholder="Enter your email for instant code delivery" autocomplete="email" required>
 
-<label>Email Address</label>
-<input type="email" id="email" placeholder="Enter your email" required>
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" placeholder="Enter your phone number (SMS alerts)" autocomplete="tel" required>
 
-<label>Phone Number</label>
-<input type="tel" id="phone" placeholder="Enter your phone number" required>
+    <button type="button" class="continue-btn" id="proceedPaymentBtn">
+        Continue to Payment 🚀
+    </button>
 
-<a href="payment.html" class="continue-btn">
-Continue to Payment
-
-</a>
-
-<div class="notes">
-
-<h3>Important Notes</h3>
-
-<ul>
-
-<li>Your gift card will be delivered only after successful payment verification.</li>
-
-<li>Please enter a valid email address and phone number.</li>
-
-<li>Your gift card code will be delivered to the email address and phone number provided above.</li>
-
-<li>Delivery may take up to 2 business days after payment verification.</li>
-
-<li>Most orders are delivered much earlier.</li>
-
-<li>Please do not submit multiple payments for the same order.</li>
-
-<li>All gift card sales are final and cannot be refunded after delivery.</li>
-
-</ul>
-
+    <div class="notes">
+        <h3>Important Verification Notes</h3>
+        <ul>
+            <li>Your gift card will be delivered only after successful payment verification.</li>
+            <li>Please enter a valid email address and phone number for code dispatch.</li>
+            <li>Delivery may take up to 2 business days after verification (most orders deliver instantly).</li>
+            <li>Please do not submit multiple payments for the same order reference.</li>
+            <li>All digital gift card sales are final and non-refundable once dispatched.</li>
+        </ul>
+    </div>
 </div>
 
-</div>
+<!-- UNIQUE CYBER-PUNK TRUST FOOTER -->
+<footer class="cyber-trust-footer">
+    <div class="footer-grid-container">
+        <div class="footer-widget">
+            <h4>iVerxa Finds Gift Cards</h4>
+            <p>Providing encrypted, instant-delivery digital gift cards and vouchers across India with verified merchant discounts.</p>
+            <div class="security-badge-box">
+                🛡️ 256-Bit SSL Encrypted Checkout
+            </div>
+        </div>
+        <div class="footer-widget">
+            <h4>Quick Shortcuts</h4>
+            <ul class="footer-nav-links">
+                <li><a href="index.html">Home Dashboard</a></li>
+                <li><a href="handpicked.html">Handpicked Deals</a></li>
+                <li><a href="giftcards.html">Gift Cards Store</a></li>
+            </ul>
+        </div>
+        <div class="footer-widget">
+            <h4>Compliance & Help</h4>
+            <ul class="footer-nav-links">
+                <li><a href="contact.html">Customer Helpdesk</a></li>
+                <li><a href="about.html">About Platform</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer-terminal-bar">
+        <p>© 2026 iVerxa Finds. All Rights Reserved.</p>
+        <span class="scroll-top-trigger" onclick="executeScrollToTop()">↑ Top of Page</span>
+    </div>
+</footer>
+
+<!-- JavaScript: Form Validation, Shake Animation & LocalStorage Saving -->
 <script>
-document.querySelector(".continue-btn").addEventListener("click", function(e) {
+document.addEventListener("DOMContentLoaded", () => {
+    // Auto-fill if user details were previously saved in this browser session
+    if (localStorage.getItem("customerName")) document.getElementById("name").value = localStorage.getItem("customerName");
+    if (localStorage.getItem("customerEmail")) document.getElementById("email").value = localStorage.getItem("customerEmail");
+    if (localStorage.getItem("customerPhone")) document.getElementById("phone").value = localStorage.getItem("customerPhone");
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
+    const proceedBtn = document.getElementById("proceedPaymentBtn");
 
-    if(name === "" || email === "" || phone === ""){
-        alert("Please fill all details.");
-        e.preventDefault();
-        return;
-    }
+    proceedBtn.addEventListener("click", function(e) {
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const phoneInput = document.getElementById("phone");
 
-    localStorage.setItem("customerName", name);
-    localStorage.setItem("customerEmail", email);
-    localStorage.setItem("customerPhone", phone);
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const phone = phoneInput.value.trim();
 
+        let isValid = true;
+
+        // Reset previous error states
+        [nameInput, emailInput, phoneInput].forEach(inp => inp.classList.remove("error-shake"));
+
+        if (name === "") {
+            nameInput.classList.add("error-shake");
+            isValid = false;
+        }
+        if (email === "" || !email.includes("@")) {
+            emailInput.classList.add("error-shake");
+            isValid = false;
+        }
+        if (phone === "" || phone.length < 10) {
+            phoneInput.classList.add("error-shake");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            alert("⚠️ Please fill in all required contact details correctly before proceeding.");
+            return;
+        }
+
+        // Save valid data to localStorage
+        localStorage.setItem("customerName", name);
+        localStorage.setItem("customerEmail", email);
+        localStorage.setItem("customerPhone", phone);
+
+        // Redirect smoothly to payment page
+        window.location.href = "payment.html";
+    });
 });
+
+function executeScrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 </script>
+
 </body>
 </html>

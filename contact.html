@@ -1,95 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- ========================================================================== -->
+    <!-- 1. APPLICATION METADATA & CONFIGURATION                                    -->
+    <!-- ========================================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#030712">
+    <meta name="description" content="iVerxa Finds - Contact Customer Support Helpdesk">
+    <meta name="author" content="iVerxa Finds Development Team">
+    
     <title>Contact Us | iVerxa Finds</title>
+    
+    <!-- EXTERNAL STYLESHEET LINK -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- ========================================================================== -->
+    <!-- 2. ULTRA-PREMIUM CONTACT STUDIO CSS ARCHITECTURE                           -->
+    <!-- ========================================================================== -->
     <style>
+        :root {
+            --bg-deep: #030712;
+            --bg-card: rgba(15, 23, 42, 0.85);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-active: #6366F1;
+            
+            --gradient-blue-purple: linear-gradient(135deg, #6366F1 0%, #A855F7 100%);
+            --gradient-hero-text: linear-gradient(135deg, #FFFFFF 0%, #C7D2FE 40%, #A855F7 80%, #F43F5E 100%);
+            
+            --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 30px;
+            --radius-pill: 50px;
+            
+            --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(99, 102, 241, 0.15);
+            --transition-smooth: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --backdrop-blur: blur(25px);
+        }
+
+        html {
+            box-sizing: border-box;
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        *, *::before, *::after {
+            box-sizing: inherit;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-base);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+            background-attachment: fixed;
+            color: #FFFFFF;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        button { background: none; border: none; font: inherit; cursor: pointer; outline: none; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* Logo Fix */
+        .logo img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        .logo img:hover { transform: scale(1.05); }
+
+        /* Contact Container Layout */
         .contact-container {
-            max-width: 700px;
+            max-width: 720px;
+            width: 100%;
             margin: 50px auto;
-            background: #1E293B;
-            padding: 40px;
-            border-radius: 20px;
+            background: var(--bg-card);
+            backdrop-filter: var(--backdrop-blur);
+            -webkit-backdrop-filter: var(--backdrop-blur);
+            padding: 45px;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            box-shadow: var(--shadow-card);
+            position: relative;
+        }
+
+        .contact-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #6366F1, #A855F7, transparent);
         }
 
         .contact-container h1 {
             text-align: center;
-            margin-bottom: 10px;
-            color: #ffffff;
+            font-size: 34px;
+            font-weight: 900;
+            background: var(--gradient-hero-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
         }
 
-        .contact-container p {
+        .contact-container p.subtitle {
             text-align: center;
-            color: #CBD5E1;
+            color: #94A3B8;
             margin-bottom: 30px;
+            font-size: 15px;
         }
 
+        /* Contact Info Card */
         .contact-info {
-            background: #0F172A;
-            padding: 20px;
-            border-radius: 12px;
+            background: rgba(3, 7, 18, 0.85);
+            padding: 22px;
+            border-radius: 14px;
             margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .contact-info p {
             text-align: left;
-            margin: 10px 0;
+            margin: 8px 0;
             color: #CBD5E1;
+            font-size: 14px;
         }
 
         .contact-info strong {
-            color: #4F7CFF;
+            color: #38BDF8;
         }
 
+        /* Form Inputs */
         label {
             display: block;
-            margin-top: 15px;
+            margin-top: 20px;
             margin-bottom: 8px;
-            font-weight: bold;
-            color: #ffffff;
+            font-weight: 700;
+            color: #CBD5E1;
+            font-size: 14px;
+            letter-spacing: 0.3px;
         }
 
         input, textarea {
             width: 100%;
-            padding: 14px;
-            border-radius: 10px;
-            border: none;
-            background: #0F172A;
+            padding: 15px 18px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(3, 7, 18, 0.85);
             color: white;
-            font-size: 16px;
+            font-size: 15px;
             box-sizing: border-box;
+            outline: none;
+            transition: var(--transition-smooth);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--border-active);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.35), inset 0 2px 4px rgba(0,0,0,0.5);
         }
 
         textarea {
             resize: vertical;
-            height: 120px;
+            height: 130px;
         }
 
+        /* Send Button */
         .send-btn {
             width: 100%;
-            margin-top: 25px;
+            margin-top: 30px;
             padding: 16px;
-            background: #4F7CFF;
+            background: var(--gradient-blue-purple);
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: bold;
+            border-radius: var(--radius-pill);
+            font-size: 16px;
+            font-weight: 800;
             cursor: pointer;
+            transition: var(--transition-smooth);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
         }
 
         .send-btn:hover {
-            background: #3567ff;
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.6);
+        }
+
+        /* ---------------------------------------------------------------------- */
+        /* UNIQUE CYBER-PUNK TRUST FOOTER (NO "MADE WITH LOVE")                    */
+        /* ---------------------------------------------------------------------- */
+        .cyber-trust-footer {
+            background: #040710;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 60px 20px 40px 20px;
+            margin-top: 90px;
+            width: 100%;
+        }
+
+        .footer-grid-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-widget h4 {
+            font-size: 15px;
+            font-weight: 800;
+            color: #FFFFFF;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-widget p {
+            color: #94A3B8;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer-nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-nav-links li a {
+            color: #94A3B8;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-nav-links li a:hover {
+            color: #38BDF8;
+        }
+
+        .security-badge-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34D399;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .footer-terminal-bar {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .footer-terminal-bar p {
+            color: #64748B;
+            font-size: 13px;
+        }
+
+        .scroll-top-trigger {
+            color: #6366F1;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .scroll-top-trigger:hover {
+            color: #A855F7;
+        }
+
+        @media (max-width: 768px) {
+            .contact-container { padding: 25px; margin: 30px 15px; }
+            .footer-terminal-bar { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
 
+<!-- Navigation Bar -->
 <nav>
     <div class="logo">
-        <img src="images/logo.jpeg" alt="iVerxa Logo">
+        <a href="index.html">
+            <img src="images/logo.png" alt="iVerxa Logo" onerror="this.src='images/logo.jpeg'">
+        </a>
     </div>
     <ul class="menu">
         <li><a href="index.html">Home</a></li>
@@ -101,9 +324,10 @@
     </ul>
 </nav>
 
+<!-- Contact Studio Container -->
 <div class="contact-container">
     <h1>Contact Us 📩</h1>
-    <p>Have a question or need support with your order? Reach out to us!</p>
+    <p class="subtitle">Have a question or need support with your order? Reach out to our team!</p>
 
     <div class="contact-info">
         <p>📧 <strong>Email Support:</strong> iverxafinds@gmail.com</p>
@@ -112,26 +336,60 @@
 
     <form action="https://formspree.io/f/mnpajdjg" method="POST">
         <label>Your Name</label>
-        <input type="text" name="name" placeholder="Enter your name" required>
+        <input type="text" name="name" placeholder="Enter your full name" required autocomplete="name">
 
         <label>Your Email</label>
-        <input type="email" name="email" placeholder="Enter your email address" required>
+        <input type="email" name="email" placeholder="Enter your email address" required autocomplete="email">
 
         <label>Subject / Order ID (Optional)</label>
         <input type="text" name="subject" placeholder="e.g. Question about Gift Card order">
 
         <label>Message</label>
-        <textarea name="message" placeholder="Write your message here..." required></textarea>
+        <textarea name="message" placeholder="Write your message or query here..." required></textarea>
 
-        <button type="submit" class="send-btn">Send Message</button>
+        <button type="submit" class="send-btn">Send Message 🚀</button>
     </form>
 </div>
 
-<footer class="footer">
-    Crafted with ❤️ in Maharashtra, India 🇮🇳
-    <br><br>
-    © 2026 iVerxa Finds. All Rights Reserved.
+<!-- UNIQUE CYBER-PUNK TRUST FOOTER -->
+<footer class="cyber-trust-footer">
+    <div class="footer-grid-container">
+        <div class="footer-widget">
+            <h4>iVerxa Finds Support</h4>
+            <p>Dedicated customer helpdesk resolving order inquiries, digital voucher dispatches, and general support tickets.</p>
+            <div class="security-badge-box">
+                🛡️ 256-Bit SSL Encrypted Support
+            </div>
+        </div>
+        <div class="footer-widget">
+            <h4>Quick Shortcuts</h4>
+            <ul class="footer-nav-links">
+                <li><a href="index.html">Home Dashboard</a></li>
+                <li><a href="handpicked.html">Handpicked Deals</a></li>
+                <li><a href="giftcards.html">Gift Cards Store</a></li>
+            </ul>
+        </div>
+        <div class="footer-widget">
+            <h4>Compliance & Help</h4>
+            <ul class="footer-nav-links">
+                <li><a href="contact.html">Customer Helpdesk</a></li>
+                <li><a href="about.html">About Platform</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer-terminal-bar">
+        <p>© 2026 iVerxa Finds. All Rights Reserved.</p>
+        <span class="scroll-top-trigger" onclick="executeScrollToTop()">↑ Top of Page</span>
+    </div>
 </footer>
+
+<!-- JavaScript: Scroll to Top Utility -->
+<script>
+function executeScrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
 
 </body>
 </html>
